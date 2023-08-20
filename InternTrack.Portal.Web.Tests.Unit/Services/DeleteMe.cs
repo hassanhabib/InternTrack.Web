@@ -13,6 +13,5 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services
 {
     internal class DeleteMe
     {
-        [Fact]
     }
 }
