@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternTrack.Portal.Web", "InternTrack.Portal.Web\InternTrack.Portal.Web.csproj", "{2110F8BE-CB08-4095-9D85-BB0592263566}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternTrack.Portal.Web", "InternTrack.Portal.Web\InternTrack.Portal.Web.csproj", "{2110F8BE-CB08-4095-9D85-BB0592263566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternTrack.Portal.Web.Infrastructure.Build", "InternTrack.Portal.Web.Infrastructure.Build\InternTrack.Portal.Web.Infrastructure.Build.csproj", "{BD5A4BFC-6B99-48A0-B2A2-B02D1DACA293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2110F8BE-CB08-4095-9D85-BB0592263566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2110F8BE-CB08-4095-9D85-BB0592263566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2110F8BE-CB08-4095-9D85-BB0592263566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5A4BFC-6B99-48A0-B2A2-B02D1DACA293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5A4BFC-6B99-48A0-B2A2-B02D1DACA293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5A4BFC-6B99-48A0-B2A2-B02D1DACA293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5A4BFC-6B99-48A0-B2A2-B02D1DACA293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
