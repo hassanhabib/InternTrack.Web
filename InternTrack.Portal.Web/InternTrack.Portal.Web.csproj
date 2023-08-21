@@ -10,4 +10,11 @@
     <PackageReference Include="RESTFulSense" Version="2.15.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Brokers\" />
+    <Folder Include="Services\" />
+    <Folder Include="Views\Bases\" />
+    <Folder Include="Views\Components\" />
+  </ItemGroup>
+
 </Project>
