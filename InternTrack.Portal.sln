@@ -1,11 +1,10 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternTrack.Portal.Web", "InternTrack.Portal.Web\InternTrack.Portal.Web.csproj", "{2110F8BE-CB08-4095-9D85-BB0592263566}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternTrack.Portal.Web.Tests.Unit", "InternTrack.Portal.Web.Tests.Unit\InternTrack.Portal.Web.Tests.Unit.csproj", "{DB4AB18B-B56A-4AD9-B7D0-DB83DE0A8DB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntrernTrack.Portal.Web.Infrastructure.Build", "IntrernTrack.Portal.Web.Infrastructure.Build\IntrernTrack.Portal.Web.Infrastructure.Build.csproj", "{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +16,10 @@ Global
 		{2110F8BE-CB08-4095-9D85-BB0592263566}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2110F8BE-CB08-4095-9D85-BB0592263566}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2110F8BE-CB08-4095-9D85-BB0592263566}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DB4AB18B-B56A-4AD9-B7D0-DB83DE0A8DB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DB4AB18B-B56A-4AD9-B7D0-DB83DE0A8DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DB4AB18B-B56A-4AD9-B7D0-DB83DE0A8DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DB4AB18B-B56A-4AD9-B7D0-DB83DE0A8DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
