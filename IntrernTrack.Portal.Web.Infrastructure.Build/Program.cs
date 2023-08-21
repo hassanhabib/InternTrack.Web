@@ -3,7 +3,6 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using System.Collections.Generic;
 using ADotNet.Clients;
 using ADotNet.Models.Pipelines.GithubPipelines.DotNets;
 using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks;
@@ -25,12 +24,12 @@ namespace InternTrack.Portal.Web.Infrastructure.Build
                 {
                     Push = new PushEvent
                     {
-                        Branches = new string[] { "main" }
+                        Branches = new string[] { "master" }
                     },
 
                     PullRequest = new PullRequestEvent
                     {
-                        Branches = new string[] { "main" }
+                        Branches = new string[] { "master" }
                     }
                 },
 
