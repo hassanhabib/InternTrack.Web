@@ -4,7 +4,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternTrack.Portal.Web", "InternTrack.Portal.Web\InternTrack.Portal.Web.csproj", "{2110F8BE-CB08-4095-9D85-BB0592263566}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntrernTrack.Portal.Web.Infrastructure.Build", "IntrernTrack.Portal.Web.Infrastructure.Build\IntrernTrack.Portal.Web.Infrastructure.Build.csproj", "{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternTrack.Portal.Web.Infrastructure.Build", "IntrernTrack.Portal.Web.Infrastructure.Build\InternTrack.Portal.Web.Infrastructure.Build.csproj", "{69CBD0B3-2D44-4B8B-9AE3-E7CAC6DE2874}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternTrack.Portal.Web.Tests.Unit", "InternTrack.Portal.Web.Tests.Unit\InternTrack.Portal.Web.Tests.Unit.csproj", "{C04F4094-A710-4BF1-B788-7281BC359AB0}"
 EndProject
