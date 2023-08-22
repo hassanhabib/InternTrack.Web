@@ -7,7 +7,7 @@ using System;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Logging
 {
-    public class LoggingBroker
+    public class LoggingBroker : ILoggingBroker
     {
         public void LogActivity(string message) =>
             Console.WriteLine(message);
