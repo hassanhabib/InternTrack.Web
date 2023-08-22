@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Services.Processings.CloudManagement
 {
-    public class CloudManagementProcessingService
+    public class CloudManagementProcessingService : ICloudManagementProcessingService
     {
         private readonly ICloudManagementService cloudManagementService;
         private readonly IConfigurationBroker configurationBroker;
