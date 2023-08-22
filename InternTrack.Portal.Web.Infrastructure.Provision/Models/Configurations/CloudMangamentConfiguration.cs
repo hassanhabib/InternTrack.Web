@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// -------------------------------------------------------
+// Copyright (c) Coalition of the Good-Hearted Engineers
+// FREE TO USE FOR THE WORLD
+// -------------------------------------------------------
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Models.Configurations
 {
-    internal class CloudMangamentConfiguration
+    public class CloudManagementConfiguration
     {
+        public string ProjectName { get; set; }
+        public CloudActions Up { get; set; }
+        public CloudActions Down { get; set; }
     }
 }

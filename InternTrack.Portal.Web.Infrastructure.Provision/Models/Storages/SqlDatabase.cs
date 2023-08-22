@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// -------------------------------------------------------
+// Copyright (c) Coalition of the Good-Hearted Engineers
+// FREE TO USE FOR THE WORLD
+// -------------------------------------------------------
+
+using Azure.ResourceManager.Sql;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Models.Storages
 {
-    internal class SqlDatabase
+    public class SqlDatabase
     {
+        public string ConnectionString { get; set; }
+        public SqlDatabaseResource Database { get; set; }
     }
 }
