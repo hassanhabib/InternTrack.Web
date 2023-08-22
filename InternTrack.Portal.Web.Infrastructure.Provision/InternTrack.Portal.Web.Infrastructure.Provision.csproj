@@ -12,4 +12,8 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Azure.ResourceManager.Sql" Version="1.2.0" />
+  </ItemGroup>
+
 </Project>
