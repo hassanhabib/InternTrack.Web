@@ -10,7 +10,7 @@ using Azure.ResourceManager.Sql;
 using InternTrack.Portal.Web.Infrastructure.Provision.Models.Storages;
 using System.Threading.Tasks;
 
-namespace InternTrack.Portal.Web.Infrastructure.Provision.Services
+namespace InternTrack.Portal.Web.Infrastructure.Provision.Services.Foundations.CloudManagements
 {
     public interface ICloudManagementService
     {

@@ -12,7 +12,7 @@ using InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Logging;
 using InternTrack.Portal.Web.Infrastructure.Provision.Models.Storages;
 using System.Threading.Tasks;
 
-namespace InternTrack.Portal.Web.Infrastructure.Provision.Services
+namespace InternTrack.Portal.Web.Infrastructure.Provision.Services.Foundations.CloudManagements
 {
     public class CloudManagementService : ICloudManagementService
     {
@@ -21,8 +21,8 @@ namespace InternTrack.Portal.Web.Infrastructure.Provision.Services
 
         public CloudManagementService()
         {
-            this.cloudBroker = new CloudBroker();
-            this.loggingBroker = new LoggingBroker();
+            cloudBroker = new CloudBroker();
+            loggingBroker = new LoggingBroker();
         }
 
         public async ValueTask<ResourceGroupResource> ProvisionResourceGroupAsync(
@@ -173,6 +173,6 @@ namespace InternTrack.Portal.Web.Infrastructure.Provision.Services
                 $"Initial Catalog={sqlServer.Data.Name}" +
                 $"User ID={sqlDatabaseAccess.AdminName}" +
                 $"Password={sqlDatabaseAccess.AdminAccess}";
-        }        
+        }
     }
 }
