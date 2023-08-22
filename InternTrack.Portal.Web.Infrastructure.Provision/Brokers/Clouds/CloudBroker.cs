@@ -16,14 +16,12 @@ namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Clouds
         private readonly string adminName;
         private readonly string adminPassword;
         private readonly ArmClient client;
-        private readonly EnvironmentCredential environmentCredential;
 
         public CloudBroker()
         {
             this.adminName = Environment.GetEnvironmentVariable("Azure_Admin_Name");
             this.adminPassword = Environment.GetEnvironmentVariable("Azure_Admin_Password");
-            this.environmentCredential = new EnvironmentCredential();
-            this.client = new ArmClient(environmentCredential);
+            this.client = new ArmClient(new EnvironmentCredential());
         }        
     }
 }
