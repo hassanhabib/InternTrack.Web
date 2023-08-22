@@ -22,6 +22,7 @@ namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Clouds
         {
             this.adminName = Environment.GetEnvironmentVariable("Azure_Admin_Name");
             this.adminPassword = Environment.GetEnvironmentVariable("Azure_Admin_Password");
+            this.environmentCredential = new EnvironmentCredential();
             this.client = new ArmClient(environmentCredential);
         }        
     }
