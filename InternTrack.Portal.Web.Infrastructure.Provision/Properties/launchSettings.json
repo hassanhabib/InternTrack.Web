@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "InternTrack.Core.Api.Infrastructure.Provision": {
+    "InternTrack.Portal.Web.Infrastructure.Provision": {
       "commandName": "Project",
       "environmentVariables": {
         "AZURE_CLIENT_ID": "",
