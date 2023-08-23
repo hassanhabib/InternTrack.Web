@@ -43,7 +43,6 @@ namespace InternTrack.Portal.Web.Brokers.Apis
             string apiBaseUrl = localConfigurations.ApiConfigurations.Url;
 
             return new RESTFulApiFactoryClient(this.httpClient);
-            throw new NotImplementedException();
         }
     }
 }
