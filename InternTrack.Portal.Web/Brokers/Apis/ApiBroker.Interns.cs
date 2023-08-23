@@ -4,46 +4,28 @@
 // -------------------------------------------------------
 
 using System;
-using System.Net.Http;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using InternTrack.Portal.Web.Models.Configurations;
-using Microsoft.Extensions.Configuration;
-using RESTFulSense.Clients;
+using InternTrack.Portal.Web.Models.Interns;
 
 namespace InternTrack.Portal.Web.Brokers.Apis
 {
-    public partial class ApiBroker : IApiBroker
+    public partial class ApiBroker
     {
-        private readonly IRESTFulApiFactoryClient apiClient;
-        private readonly HttpClient httpClient;
+        private const string InternsRelativeUrl = "api/interns";
 
-        public ApiBroker(HttpClient httpClient, IConfiguration configuration)
-        {
-            this.httpClient = httpClient;
-            this.apiClient = GetApiClient(configuration);
-        }
+        public async ValueTask<Intern> PostInternAsync(Intern intern) =>
+        await this.PostAsync(InternsRelativeUrl, intern);
 
-        private async ValueTask<T> GetAsync<T>(string relativeUrl) =>
-             await this.apiClient.GetContentAsync<T>(relativeUrl);
+        public async ValueTask<List<Intern>> GetAllInternsAsync() =>
+        await this.GetAsync<List<Intern>>(InternsRelativeUrl);
 
-        private async ValueTask<T> PostAsync<T>(string relativeUrl, T content) =>
-            await this.apiClient.PostContentAsync<T>(relativeUrl, content);
+        public async ValueTask<Intern> GetInternByIdAsync(Guid internId) =>
+            await this.GetAsync<Intern>($"{InternsRelativeUrl}/{internId}");
+        public async ValueTask<Intern> PutInternAsync(Intern intern) =>
+        await this.PutAsync(InternsRelativeUrl, intern);
 
-        private async ValueTask<T> PutAsync<T>(string relativeUrl, T content) =>
-            await this.apiClient.PutContentAsync<T>(relativeUrl, content);
-
-        private async ValueTask<T> DeleteAsync<T>(string relativeUrl) =>
-            await this.apiClient.DeleteContentAsync<T>(relativeUrl);
-
-        private IRESTFulApiFactoryClient GetApiClient(IConfiguration configuration)
-        {
-            LocalConfigurations localConfigurations =
-            configuration.Get<LocalConfigurations>();
-
-            string apiBaseUrl = localConfigurations.ApiConfigurations.Url;
-
-            return new RESTFulApiFactoryClient(this.httpClient);
-            throw new NotImplementedException();
-        }
+        public async ValueTask<Intern> DeleteInternByIdAsync(Guid internId) =>
+            await this.DeleteAsync<Intern>($"{InternsRelativeUrl}/{internId}");
     }
 }
