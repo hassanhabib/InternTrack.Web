@@ -15,15 +15,16 @@ namespace InternTrack.Portal.Web.Brokers.Apis
         private const string InternsRelativeUrl = "api/interns";
 
         public async ValueTask<Intern> PostInternAsync(Intern intern) =>
-        await this.PostAsync(InternsRelativeUrl, intern);
+            await this.PostAsync(InternsRelativeUrl, intern);
 
         public async ValueTask<List<Intern>> GetAllInternsAsync() =>
-        await this.GetAsync<List<Intern>>(InternsRelativeUrl);
+            await this.GetAsync<List<Intern>>(InternsRelativeUrl);
 
         public async ValueTask<Intern> GetInternByIdAsync(Guid internId) =>
             await this.GetAsync<Intern>($"{InternsRelativeUrl}/{internId}");
+
         public async ValueTask<Intern> PutInternAsync(Intern intern) =>
-        await this.PutAsync(InternsRelativeUrl, intern);
+            await this.PutAsync(InternsRelativeUrl, intern);
 
         public async ValueTask<Intern> DeleteInternByIdAsync(Guid internId) =>
             await this.DeleteAsync<Intern>($"{InternsRelativeUrl}/{internId}");
