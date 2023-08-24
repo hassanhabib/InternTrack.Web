@@ -9,7 +9,7 @@ namespace InternTrack.Portal.Web.Brokers.DateTimes
 {
     public class DateTimeBroker : IDateTimeBroker
     {
-        public DateTimeOffset GetCurrentDateTimeOffset() => 
+        public DateTimeOffset GetCurrentDateTimeOffset() =>
             DateTimeOffset.UtcNow;
     }
 }

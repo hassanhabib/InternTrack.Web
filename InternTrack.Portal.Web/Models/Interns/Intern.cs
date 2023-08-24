@@ -20,6 +20,6 @@ namespace InternTrack.Portal.Web.Models.Interns
         public DateTimeOffset UpdatedDate { get; set; }
         public DateTimeOffset JoinDate { get; set; }
         public Guid CreatedBy { get; set; }
-        public Guid UpdatedBy { get; set;}
+        public Guid UpdatedBy { get; set; }
     }
 }
