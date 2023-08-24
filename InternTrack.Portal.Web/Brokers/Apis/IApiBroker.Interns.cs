@@ -1,4 +1,9 @@
-﻿using InternTrack.Portal.Web.Models.Interns;
+﻿// -------------------------------------------------------
+// Copyright (c) Coalition of the Good-Hearted Engineers
+// FREE TO USE FOR THE WORLD
+// -------------------------------------------------------
+
+using InternTrack.Portal.Web.Models.Interns;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
