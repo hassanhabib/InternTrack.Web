@@ -3,7 +3,6 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Models.Configurations;
