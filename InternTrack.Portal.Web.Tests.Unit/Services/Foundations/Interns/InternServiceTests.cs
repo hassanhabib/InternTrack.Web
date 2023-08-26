@@ -4,12 +4,19 @@
 // -------------------------------------------------------
 
 using System;
+using System.Linq.Expressions;
+using System.Net.Http;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
+using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using InternTrack.Portal.Web.Services.Foundations.Interns;
+using Microsoft.AspNetCore.Http;
 using Moq;
+using RESTFulSense.Exceptions;
 using Tynamix.ObjectFiller;
+using Xeptions;
+using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -34,6 +41,46 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
         private static Intern CreateRandomIntern() => 
             CreateInternFiller().Create();
+
+        public static TheoryData CriticalDependencyException()
+        {
+            string exceptionMessage = GetRandomMessage();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpRequestException =
+                new HttpRequestException();
+
+            var httpResponseUrlNotFoundException =
+                new HttpResponseUrlNotFoundException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            var httpResponseUnAuthorizedException =
+                new HttpResponseUnauthorizedException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpRequestException,
+                httpResponseUrlNotFoundException,
+                httpResponseUnAuthorizedException
+            };
+        }
+
+        private static string GetRandomMessage() => 
+            new MnemonicString(wordCount: GetRandomNumber()).GetValue();
+        private static int GetRandomNumber() =>
+            new IntRange(min: 2, max: 10).GetValue();
+
+        private Expression<Func<Xeption, bool>> SameAsExceptionAs(
+            Xeption expectedException)
+        {
+            return actualException =>
+                actualException.Message == expectedException.Message &&
+                actualException.InnerException.Message == expectedException.InnerException.Message &&
+                (actualException.InnerException as Xeption).DataEquals(expectedException.InnerException.Data);
+        }
 
         private static Filler<Intern> CreateInternFiller()
         {
