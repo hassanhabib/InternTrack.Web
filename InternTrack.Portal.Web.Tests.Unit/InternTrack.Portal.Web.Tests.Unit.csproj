@@ -24,4 +24,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\InternTrack.Portal.Web\InternTrack.Portal.Web.csproj" />
+  </ItemGroup>
+
 </Project>

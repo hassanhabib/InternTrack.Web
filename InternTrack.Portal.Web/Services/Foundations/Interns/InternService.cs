@@ -21,7 +21,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Intern> PostIntern(Intern intern)
+        public ValueTask<Intern> AddIntern(Intern intern)
         {
             throw new System.NotImplementedException();
         }
