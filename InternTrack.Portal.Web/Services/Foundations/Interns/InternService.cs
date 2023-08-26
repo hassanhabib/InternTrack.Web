@@ -23,7 +23,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
         public ValueTask<Intern> AddInternAsync(Intern intern)
         {
-            throw new System.NotImplementedException();
+            return this.apiBroker.PostInternAsync(intern);
         }
     }
 }
