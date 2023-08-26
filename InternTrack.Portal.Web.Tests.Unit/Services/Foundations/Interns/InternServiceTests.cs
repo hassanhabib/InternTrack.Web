@@ -55,7 +55,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     responseMessage: responseMessage,
                     message: exceptionMessage);
 
-            var httpResponseUnAuthorizedException =
+            var httpResponseUnauthorizedException =
                 new HttpResponseUnauthorizedException(
                     responseMessage: responseMessage,
                     message: exceptionMessage);
@@ -64,7 +64,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             {
                 httpRequestException,
                 httpResponseUrlNotFoundException,
-                httpResponseUnAuthorizedException
+                httpResponseUnauthorizedException
             };
         }
 

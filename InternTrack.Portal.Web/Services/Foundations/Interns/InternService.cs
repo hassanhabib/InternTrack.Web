@@ -10,7 +10,7 @@ using InternTrack.Portal.Web.Models.Interns;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
-    public class InternService : IInternService
+    public partial class InternService : IInternService
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -21,9 +21,10 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Intern> AddInternAsync(Intern intern)
+        public ValueTask<Intern> AddInternAsync(Intern intern) =>
+        TryCatch(async () =>
         {
-            return this.apiBroker.PostInternAsync(intern);
-        }
+            return await this.apiBroker.PostInternAsync(intern);
+        });
     }
 }

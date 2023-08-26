@@ -26,7 +26,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var failedInternDependencyException =
                 new FailedInternDependencyException(
-                    message: "Failed comment dependency error occurred, contact support.",
+                    message: "Failed Intern dependency error occurred, contact support.",
                         innerException: criticalDependencyException);
 
             var expectedInternDependencyException =
