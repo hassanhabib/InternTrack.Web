@@ -3,8 +3,10 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
+using InternTrack.Portal.Web.Models.Interns;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
@@ -17,6 +19,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         {
             this.apiBroker = apiBroker;
             this.loggingBroker = loggingBroker;
+        }
+
+        public ValueTask<Intern> PostIntern(Intern intern)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
