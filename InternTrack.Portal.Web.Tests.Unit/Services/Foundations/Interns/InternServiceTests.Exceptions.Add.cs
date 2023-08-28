@@ -247,7 +247,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var expectedInternServiceException =
                 new InternServiceException(
-                    message: "Comment service error occurred, contact support.",
+                    message: "Intern service error occurred, contact support.",
                         innerException: failedInternServiceException);
 
             this.apiBrokerMock.Setup(broker =>
