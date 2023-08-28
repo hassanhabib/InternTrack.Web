@@ -21,11 +21,11 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
                   data)
         { }
 
-        public InvalidInternException(string message, Xeption innerException)
+        public InvalidInternException(string message, Exception innerException)
             : base(message, innerException)
         { }
 
-        public InvalidInternException(string message, Xeption innerException, IDictionary data) 
+        public InvalidInternException(string message, Exception innerException, IDictionary data) 
             : base(message, innerException, data) 
         { }
     }
