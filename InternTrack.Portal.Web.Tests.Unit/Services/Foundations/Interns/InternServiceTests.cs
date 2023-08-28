@@ -4,6 +4,8 @@
 // -------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using InternTrack.Portal.Web.Brokers.Apis;
@@ -41,6 +43,13 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
         private static Intern CreateRandomIntern() => 
             CreateInternFiller().Create();
+
+        private static Dictionary<string, List<string>> CreateRandomDictionary()
+        {
+            var filler = new Filler<Dictionary<string, List<string>>>();
+
+            return filler.Create();
+        }
 
         public static TheoryData CriticalDependencyException()
         {
