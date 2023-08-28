@@ -56,6 +56,15 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogDependencyValidationException(invalidInternException);
             }
+            catch (HttpResponseConflictException httpResponseConflictException)
+            {
+                var invalidInternException =
+                    new InvalidInternException(
+                        httpResponseConflictException,
+                            httpResponseConflictException.Data);
+
+                throw CreateAndLogDependencyValidationException(invalidInternException);
+            }
         }
 
         private InternDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
