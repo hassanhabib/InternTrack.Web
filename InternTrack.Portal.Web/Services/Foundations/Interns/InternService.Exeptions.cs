@@ -81,8 +81,17 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogDependencyException(failedInternDependencyException);
             }
-        }
-        
+            catch (Exception exception)
+            {
+                var failedInternServiceException =
+                    new FailedInternServiceException(
+                        message: "Failed Intern service error occurred, contact support.",
+                            innerException: exception);
+
+                throw CreateAndLogInternServiceException(failedInternServiceException);
+            }
+        }             
+
         private InternDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
         {
             var internDependencyException =
@@ -117,6 +126,18 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             this.loggingBroker.LogError(internDependencyException);
 
             return internDependencyException;
+        }
+
+        private InternServiceException CreateAndLogInternServiceException(Xeption exception)
+        {
+            var internServiceException =
+                new InternServiceException(
+                    message: "Intern service error occurred, contact support.",
+                        innerException: exception);
+
+            this.loggingBroker.LogError(internServiceException);
+
+            return internServiceException;
         }
     }
 }
