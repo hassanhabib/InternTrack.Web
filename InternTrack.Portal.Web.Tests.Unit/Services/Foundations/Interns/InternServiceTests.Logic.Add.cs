@@ -31,7 +31,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             Intern actualIntern =
                 await this.internService.AddInternAsync(inputIntern);
 
-            //
+            //then
             actualIntern.Should().BeEquivalentTo(expectedIntern);
 
             this.apiBrokerMock.Verify(broker =>
