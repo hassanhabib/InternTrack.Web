@@ -42,6 +42,15 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
             }
+            catch (HttpResponseBadRequestException httpResponseBadRequestException)
+            {
+                var invalidInternException =
+                    new InvalidInternException(
+                        httpResponseBadRequestException,
+                            httpResponseBadRequestException.Data);
+
+                throw CreateAndLogDependencyValidationException(invalidInternException);
+            }
         }
 
         private InternDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
@@ -52,6 +61,16 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             this.loggingBroker.LogCritical(internDependencyException);
 
             return internDependencyException;
+        }
+
+        private InternDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+        {
+            var internDependencyValidationException =
+                new InternDependencyValidationException(exception);
+
+            this.loggingBroker.LogError(internDependencyValidationException);
+
+            return internDependencyValidationException;
         }
     }
 }
