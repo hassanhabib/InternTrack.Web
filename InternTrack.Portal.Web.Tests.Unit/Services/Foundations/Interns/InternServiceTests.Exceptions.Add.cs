@@ -22,7 +22,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnAddIfCriticalErrorOccursAndLogItAsync(
+        private async Task ShouldThrowCriticalDependencyExceptionOnAddIfCriticalErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
             //given
@@ -68,7 +68,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnAddIfBadRequestExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnAddIfBadRequestExceptionOccursAndLogItAsync()
         {
             //given
             Intern someIntern = CreateRandomIntern();
