@@ -4,7 +4,11 @@
 // -------------------------------------------------------
 
 using System;
+using InternTrack.Portal.Web.Brokers.Apis;
+using InternTrack.Portal.Web.Brokers.DateTimes;
+using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Configurations;
+using InternTrack.Portal.Web.Services.Foundations.Interns;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +31,10 @@ namespace InternTrack.Portal.Web
             services.AddServerSideBlazor();
             AddHttpClient(services);
             AddRootDirectory(services);
+            services.AddScoped<IApiBroker, ApiBroker>();
+            services.AddScoped<ILoggingBroker, LoggingBroker>();
+            services.AddScoped<IDateTimeBroker, DateTimeBroker>();
+            services.AddScoped<IInternService, InternService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

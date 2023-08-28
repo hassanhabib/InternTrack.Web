@@ -3,12 +3,14 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
+using InternTrack.Portal.Web.Models.Interns;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
-    public class InternService : IInternService
+    public partial class InternService : IInternService
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -18,5 +20,13 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             this.apiBroker = apiBroker;
             this.loggingBroker = loggingBroker;
         }
+
+        public ValueTask<Intern> AddInternAsync(Intern intern) =>
+        TryCatch(async () =>
+        {
+            ValidateInternOnAdd(intern);
+
+            return await this.apiBroker.PostInternAsync(intern);
+        });
     }
 }
