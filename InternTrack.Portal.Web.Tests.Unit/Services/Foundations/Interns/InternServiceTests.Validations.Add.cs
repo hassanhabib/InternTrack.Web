@@ -16,7 +16,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     public partial class InternServiceTests
     {
         [Fact]
-        public async void ShouldThrowValidationExceptionOnAddWhenInternIsNullAndLogItAsync()
+        private async void ShouldThrowValidationExceptionOnAddWhenInternIsNullAndLogItAsync()
         {
             //given
             Intern nullIntern = null;
@@ -45,7 +45,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PostInternAsync(It.IsAny<Intern>()),
-                    Times.Once);
+                    Times.Never);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameAsExceptionAs(

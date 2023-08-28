@@ -24,6 +24,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         public ValueTask<Intern> AddInternAsync(Intern intern) =>
         TryCatch(async () =>
         {
+            ValidateInternOnAdd(intern);
+
             return await this.apiBroker.PostInternAsync(intern);
         });
     }

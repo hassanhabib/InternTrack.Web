@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using InternTrack.Portal.Web.Models.Interns;
@@ -24,6 +25,15 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             try
             {
                 return await returningFunction();
+            }
+            catch (NullInternException nullInternException)
+            {
+                var isNullInternException =
+                    new NullInternException(
+                        message: "The Intern is null.",
+                            innerException: nullInternException);
+
+                throw CreateAndLogValidationException(nullInternException);
             }
             catch (HttpRequestException httpRequestException)
             {
@@ -90,7 +100,19 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogInternServiceException(failedInternServiceException);
             }
-        }             
+        }
+
+        private InternValidationException CreateAndLogValidationException(Xeption exception)
+        {
+            var internValidationException =
+                new InternValidationException(
+                    message: "Intern validation error occurred. Please, try again.",
+                        innerException: exception);
+
+            this.loggingBroker.LogError(internValidationException);
+
+            return internValidationException;
+        }
 
         private InternDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
         {
