@@ -182,7 +182,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowInternDependencyExceptionOnAddIfResponseExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowInternDependencyExceptionOnAddIfResponseExceptionOccursAndLogItAsync()
         {
             //given
             Intern someIntern = CreateRandomIntern();
