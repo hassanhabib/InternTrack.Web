@@ -17,10 +17,9 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
     public partial class InternService
     {
-        private delegate ValueTask<Intern> ReturningCommentFunction();
-        private delegate ValueTask<List<Intern>> ReturningCommentsFunction();
+        private delegate ValueTask<Intern> ReturningInternFunction();
 
-        private async ValueTask<Intern> TryCatch(ReturningCommentFunction returningFunction)
+        private async ValueTask<Intern> TryCatch(ReturningInternFunction returningFunction)
         {
             try
             {
