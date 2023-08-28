@@ -122,6 +122,63 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
-        }        
+        }
+
+        [Fact]
+        private async Task ShouldThrowDependencyValidationExceptionOnAddIfConflictExceptionOccursAndLogItAsync()
+        {
+            //given
+            Intern someIntern = CreateRandomIntern();
+            IDictionary randomDictionary = CreateRandomDictionary();
+            IDictionary exceptionData = randomDictionary;
+            string someMessage = GetRandomMessage();
+            var someResponseMessage = new HttpResponseMessage();
+
+            var httpResponseConflictException =
+                new HttpResponseConflictException(
+                    someResponseMessage,
+                        someMessage);
+
+            httpResponseConflictException.AddData(exceptionData);
+
+            var invalidInternException =
+                new InvalidInternException(
+                    message: "Invalid Intern error occurred. Please correct the errors and try again.",
+                        innerException: httpResponseConflictException,
+                            data: exceptionData);
+
+            var expectedInternDependencyValidationException =
+                new InternDependencyValidationException(
+                    message: "Intern dependency validation error occurred, please try again.",
+                        innerException: invalidInternException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.PostInternAsync(It.IsAny<Intern>()))
+                    .ThrowsAsync(httpResponseConflictException);
+
+            //when
+            ValueTask<Intern> addInternTask =
+                this.internService.AddInternAsync(someIntern);
+
+            InternDependencyValidationException actualInternDependencyValidationException =
+                await Assert.ThrowsAsync<InternDependencyValidationException>(
+                    addInternTask.AsTask);
+
+            //then
+            actualInternDependencyValidationException.Should()
+                .BeEquivalentTo(expectedInternDependencyValidationException);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PostInternAsync(It.IsAny<Intern>()),
+                 Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameAsExceptionAs(
+                    expectedInternDependencyValidationException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
