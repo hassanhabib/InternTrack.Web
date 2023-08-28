@@ -48,7 +48,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     Times.Never);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameAsExceptionAs(
+                broker.LogError(It.Is(SameExceptionAs(
                     expectedInternValidationException))),
                         Times.Once);
 
@@ -151,7 +151,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     Times.Never);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameAsExceptionAs(
+                broker.LogError(It.Is(SameExceptionAs(
                     expectedInternValidationException))),
                         Times.Once);
 
