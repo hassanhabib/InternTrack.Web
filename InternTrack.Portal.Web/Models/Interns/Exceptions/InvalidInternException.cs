@@ -12,7 +12,7 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
     public class InvalidInternException : Xeption
     {
         public InvalidInternException()
-            : base(message: "Invalid Intern. Correct the errors and try again.")
+            : base(message: "Invalid Intern error occurred. Please correct the errors and try again.")
         { }
 
         public InvalidInternException(Exception innerException, IDictionary data)

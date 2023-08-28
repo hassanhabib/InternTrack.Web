@@ -35,6 +35,15 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogValidationException(nullInternException);
             }
+            catch (InvalidInternException invalidInternException)
+            {
+                var isInvalidInternException =
+                    new InvalidInternException(
+                        message: "Invalid Intern error occurred. Please correct the errors and try again.",
+                            innerException: invalidInternException);
+
+                throw CreateAndLogValidationException(invalidInternException);
+            }
             catch (HttpRequestException httpRequestException)
             {
                 var failedInternDependencyException =
