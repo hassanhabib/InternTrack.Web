@@ -4,11 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
-using InternTrack.Portal.Web.Models.Interns;
-using Xunit;
 using FluentAssertions;
+using InternTrack.Portal.Web.Models.Interns;
+using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using Moq;
+using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -57,7 +57,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
-            this.apiBrokerMock.VerifyNoOtherCalls();            
+            this.apiBrokerMock.VerifyNoOtherCalls();
         }
     }
 }

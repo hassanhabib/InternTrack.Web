@@ -3,16 +3,14 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using System.Threading.Tasks;
 using System;
-using Xunit;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
-using InternTrack.Portal.Web.Models.Interns;
-using Moq;
-using FluentAssertions;
-using RESTFulSense.Exceptions;
 using System.Net.Http;
-using System.Collections;
+using System.Threading.Tasks;
+using FluentAssertions;
+using InternTrack.Portal.Web.Models.Interns.Exceptions;
+using Moq;
+using RESTFulSense.Exceptions;
+using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -66,7 +64,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task 
+        private async Task
             ShouldThrowDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync()
         {
             //given
@@ -93,7 +91,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.GetInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(httpResponseException);
             //when
-            var retrieveInternTask = 
+            var retrieveInternTask =
                 this.internService.RetrieveInternByIdAsync(someInternId);
 
             InternDependencyException actualInternDependencyException =
@@ -118,7 +116,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task 
+        private async Task
             ShouldThrowServiceExceptionOnRetrieveByIdIfServiceErrorOccursAndLogItAsync()
         {
             Guid someInternId = Guid.NewGuid();
