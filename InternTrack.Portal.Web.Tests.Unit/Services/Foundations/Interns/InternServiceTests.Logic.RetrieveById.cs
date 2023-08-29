@@ -14,7 +14,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     private partial class InternServiceTests
     {
         [Fact]
-        public async Task ShouldRetrieveInternByIdAsync()
+        private async Task ShouldRetrieveInternByIdAsync()
         {
             //given
             Intern randomIntern = CreateRandomIntern();
