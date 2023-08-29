@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
+using Microsoft.VisualBasic;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
@@ -30,9 +31,9 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return await this.apiBroker.PostInternAsync(intern);
         });
 
-        public ValueTask<Intern> RetrieveInternByIdAsync(Guid internId)
+        public async ValueTask<Intern> RetrieveInternByIdAsync(Guid internId)
         {
-            throw new NotImplementedException();
+            return await this.apiBroker.GetInternByIdAsync(internId);
         }
     }
 }
