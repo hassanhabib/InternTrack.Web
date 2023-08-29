@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Reflection.Metadata;
 using InternTrack.Portal.Web.Models.Interns;
@@ -35,7 +35,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             }
         }
 
-        public static void ValidateInternId(Guid internId) =>
+        private static void ValidateInternId(Guid internId) =>
             Validate((Rule: IsInvalid(internId), Parameter: nameof(Intern.Id)));
 
         private static dynamic IsInvalid(Guid id) => new
