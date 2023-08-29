@@ -11,7 +11,7 @@ using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
-    public partial class InternServiceTests
+    private partial class InternServiceTests
     {
         [Fact]
         public async Task ShouldRetrieveInternByIdAsync()
