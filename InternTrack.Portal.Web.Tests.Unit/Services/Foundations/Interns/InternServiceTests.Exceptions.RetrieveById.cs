@@ -14,12 +14,13 @@ using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
-    public partial class InternServiceTests
+    private partial class InternServiceTests
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync(
-            Exception criticalDependencyException)
+        public async Task 
+            ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync(
+                Exception criticalDependencyException)
         {
             //given
             Guid someInternId = Guid.NewGuid();
