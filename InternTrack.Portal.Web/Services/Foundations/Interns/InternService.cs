@@ -31,10 +31,9 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return await this.apiBroker.PostInternAsync(intern);
         });
 
-        public ValueTask<Intern> RetrieveInternByIdAsync(Guid internId) =>
-        TryCatch(async () => 
+        public async ValueTask<Intern> RetrieveInternByIdAsync(Guid internId)
         {
             return await this.apiBroker.GetInternByIdAsync(internId);
-        });
+        }
     }
 }
