@@ -118,7 +118,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task ShouldThrowServiceExceptionOnRetrieveByIdIfServiceErrorOccursAndLogItAsync()
+        private async Task 
+            ShouldThrowServiceExceptionOnRetrieveByIdIfServiceErrorOccursAndLogItAsync()
         {
             Guid someInternId = Guid.NewGuid();
             var serviceException = new Exception();
