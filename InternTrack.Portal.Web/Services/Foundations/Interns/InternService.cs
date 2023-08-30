@@ -4,11 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
-using Microsoft.VisualBasic;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
@@ -32,11 +32,20 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         });
 
         public ValueTask<Intern> RetrieveInternByIdAsync(Guid internId) =>
-        TryCatch(async () => 
+        TryCatch(async () =>
         {
             ValidateInternId(internId);
 
             return await this.apiBroker.GetInternByIdAsync(internId);
         });
+
+        public ValueTask<List<Intern>> RetrieveAllInternsAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+//TryCatch(async () =>
+//{
+//    return await this.apiBroker.GetAllInternsAsync();
+//});  

@@ -19,7 +19,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
     public partial class InternService
     {
         private delegate ValueTask<Intern> ReturningInternFunction();
-
+        private delegate ValueTask<List<Intern>> ReturningInternsFunction();
         private async ValueTask<Intern> TryCatch(ReturningInternFunction returningFunction)
         {
             try
@@ -109,6 +109,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogInternServiceException(failedInternServiceException);
             }
+        }
+
+        private async ValueTask<List<Intern>> TryCatch(ReturningInternsFunction returningFunction)
+        {
+            return await returningFunction();    
         }
 
         private InternValidationException CreateAndLogValidationException(Xeption exception)
