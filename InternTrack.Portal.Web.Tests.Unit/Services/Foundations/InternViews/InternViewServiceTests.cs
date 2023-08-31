@@ -35,7 +35,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
             var compareConfig = new ComparisonConfig();
             compareConfig.IgnoreProperty<Intern>(intern => intern.Id);
-            this.compareLogic = new CompareLogic();
+            this.compareLogic = new CompareLogic(compareConfig);
 
             this.internViewService = new InternViewService(
                 internService: this.internServiceMock.Object,
@@ -55,7 +55,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 FirstName = GetRandomName(),
                 MiddleName = GetRandomName(),
                 LastName = GetRandomName(),
-                Eamil = GetRandomName(),
+                Email = GetRandomName(),
                 PhoneNumber = GetRandomString(),
                 Status = GetRandomString(),
                 CreatedDate = auditDates,
