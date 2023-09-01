@@ -62,6 +62,22 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             };
         }
 
+        public static TheoryData InternServiceDependencyExceptions()
+        {
+            var innerException = new Exception();
+
+            return new TheoryData<Exception>
+            {
+                new InternDependencyException(
+                    message: "Intern dependency error occurred, contact support.",
+                        innerException),
+
+                new InternServiceException(
+                    message: "Intern service error occurred, contact support.",
+                        innerException)
+            };
+        }
+
         private static dynamic CreateRandomInternViewProperties(
             DateTimeOffset auditDates,
             Guid auditIds)

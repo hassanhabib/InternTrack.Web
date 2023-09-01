@@ -68,5 +68,58 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
         }
+
+        [Theory]
+        [MemberData(nameof(InternServiceDependencyExceptions))]
+        private async Task 
+            ShouldThrowDependencyExceptionOnAddIfInternDependencyErrorOccurredAndLogItAsync(
+            Exception internServiceDependencyException)
+        {
+            // given
+            InternView someInternView = CreateRandomInternView();
+
+            var expectedDependencyException =
+                new InternViewDependencyException(
+                    message: "Intern View dependency validation error occurred, try again.",
+                        innerException: internServiceDependencyException);
+
+            this.internServiceMock.Setup(service =>
+                service.AddInternAsync(It.IsAny<Intern>()))
+                    .ThrowsAsync(internServiceDependencyException);
+
+            // when
+            ValueTask<InternView> addInternViewTask =
+                this.internViewService.AddInternViewAsync(someInternView);
+
+            InternViewDependencyException actualDependencyValidationException =
+                await Assert.ThrowsAsync<InternViewDependencyException>(() =>
+                    addInternViewTask.AsTask());
+
+            // then
+            actualDependencyValidationException.Should()
+                .BeEquivalentTo(expectedDependencyException);
+
+            this.userServiceMock.Verify(service =>
+                service.GetCurrentlyLoggedInUser(),
+                    Times.Once);
+
+            this.dateTimeBrokerMock.Verify(broker =>
+                broker.GetCurrentDateTimeOffset(),
+                    Times.Once);
+
+            this.internServiceMock.Verify(service =>
+                service.AddInternAsync(It.IsAny<Intern>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedDependencyException))),
+                        Times.Once);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.internServiceMock.VerifyNoOtherCalls();
+        }
     }
 }
