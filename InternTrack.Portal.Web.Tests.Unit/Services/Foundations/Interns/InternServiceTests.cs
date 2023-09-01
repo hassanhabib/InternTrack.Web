@@ -4,16 +4,13 @@
 // -------------------------------------------------------
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using InternTrack.Portal.Web.Services.Foundations.Interns;
-using Microsoft.AspNetCore.Http;
 using Moq;
 using RESTFulSense.Exceptions;
 using Tynamix.ObjectFiller;
@@ -36,19 +33,6 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.internService = new InternService(
                 apiBroker: this.apiBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object);
-        }
-
-        private static DateTimeOffset GetRandomDatetimeOffSet() =>
-            new DateTimeRange(earliestDate: new DateTime()).GetValue();
-
-        private static Intern CreateRandomIntern() => 
-            CreateInternFiller().Create();
-
-        private static Dictionary<string, List<string>> CreateRandomDictionary()
-        {
-            var filler = new Filler<Dictionary<string, List<string>>>();
-
-            return filler.Create();
         }
 
         public static TheoryData CriticalDependencyException()
@@ -77,7 +61,20 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             };
         }
 
-        private static string GetRandomMessage() => 
+        private static DateTimeOffset GetRandomDatetimeOffSet() =>
+            new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
+        private static Intern CreateRandomIntern() =>
+            CreateInternFiller().Create();
+
+        private static Dictionary<string, List<string>> CreateRandomDictionary()
+        {
+            var filler = new Filler<Dictionary<string, List<string>>>();
+
+            return filler.Create();
+        }
+
+        private static string GetRandomMessage() =>
             new MnemonicString(wordCount: GetRandomNumber()).GetValue();
         private static int GetRandomNumber() =>
             new IntRange(min: 2, max: 10).GetValue();
@@ -99,6 +96,6 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 .OnType<DateTimeOffset>().Use(GetRandomDatetimeOffSet());
 
             return filler;
-        }        
+        }
     }
 }
