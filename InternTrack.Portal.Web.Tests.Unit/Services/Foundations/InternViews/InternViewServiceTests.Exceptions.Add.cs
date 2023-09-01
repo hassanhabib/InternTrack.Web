@@ -121,5 +121,57 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        private async Task 
+            ShouldThrowServiceExceptionOnAddIfServiceErrorOccurredAndLogItAsync()
+        {
+            // given
+            InternView someInternView = CreateRandomInternView();
+            var serviceException = new Exception();
+
+            var expectedInternServiceException =
+                new InternViewServiceException(
+                    message: "Intern View service error occurred, contact support.", 
+                        innerException: serviceException);
+
+            this.internServiceMock.Setup(service =>
+                service.AddInternAsync(It.IsAny<Intern>()))
+                    .ThrowsAsync(serviceException);
+
+            // when
+            ValueTask<InternView> addInternViewTask =
+                this.internViewService.AddInternViewAsync(someInternView);
+
+            InternViewServiceException actualInternServiceException =
+                await Assert.ThrowsAsync<InternViewServiceException>(() =>
+                    addInternViewTask.AsTask());
+
+            // then
+            actualInternServiceException.Should()
+                .BeEquivalentTo(expectedInternServiceException);
+
+            this.userServiceMock.Verify(service =>
+                service.GetCurrentlyLoggedInUser(),
+                    Times.Once);
+
+            this.dateTimeBrokerMock.Verify(broker =>
+                broker.GetCurrentDateTimeOffset(),
+                    Times.Once);
+                        
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternServiceException))),
+                        Times.Once);
+
+            this.internServiceMock.Verify(service =>
+                service.AddInternAsync(It.IsAny<Intern>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.internServiceMock.VerifyNoOtherCalls();
+        }
     }
 }
