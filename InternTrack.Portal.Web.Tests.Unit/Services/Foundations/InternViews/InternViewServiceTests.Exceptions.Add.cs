@@ -7,7 +7,6 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using InternTrack.Portal.Web.Models.InternViews;
 using InternTrack.Portal.Web.Models.InternViews.Exceptions;
 using Moq;
@@ -28,7 +27,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
             var expectedDependencyValidationException =
                 new InternViewDependencyValidationException(
-                    message: "Intern dependency validation error occurred, please try again.",
+                    message: "Intern View dependency validation error occurred, try again.",
                         innerException: internServiceValidationException);
 
             this.internServiceMock.Setup(service =>
@@ -39,8 +38,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             ValueTask<InternView> addInternViewTask =
                 this.internViewService.AddInternViewAsync(someInternView);
 
-            InternDependencyValidationException actualDependencyValidationException =
-                await Assert.ThrowsAsync<InternDependencyValidationException>(() =>
+            InternViewDependencyValidationException actualDependencyValidationException =
+                await Assert.ThrowsAsync<InternViewDependencyValidationException>(() =>
                     addInternViewTask.AsTask());
 
             // then

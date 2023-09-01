@@ -33,14 +33,15 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             this.userService = userService;
         }
 
-        public async ValueTask<InternView> AddInternViewAsync(InternView internView)
-        {
-            Intern mappedIntern = MapToIntern(internView);
+        public ValueTask<InternView> AddInternViewAsync(InternView internView) =>
+            TryCatch(async () =>
+            {
+                Intern mappedIntern = MapToIntern(internView);
 
-            await this.internService.AddInternAsync(mappedIntern);
+                await this.internService.AddInternAsync(mappedIntern);
 
-            return internView;
-        }
+                return internView;
+            });
 
         private Intern MapToIntern(InternView internView)
         {
