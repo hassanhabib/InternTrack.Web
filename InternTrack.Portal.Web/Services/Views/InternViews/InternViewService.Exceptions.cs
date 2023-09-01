@@ -30,6 +30,14 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             {
                 throw CreateAndLogDependencyValidationException(internValidationException);
             }
+            catch (InternDependencyException internDependencyException)
+            {
+                throw CreateAndLogDependencyException(internDependencyException);
+            }
+            catch (InternServiceException internServiceException)
+            {
+                throw CreateAndLogDependencyException(internServiceException);
+            }
         }
 
         private InternViewDependencyValidationException CreateAndLogDependencyValidationException(
@@ -43,6 +51,19 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             this.loggingBroker.LogError(internViewDependencyValidationException);
 
             return internViewDependencyValidationException;
+        }
+
+        private InternViewDependencyException CreateAndLogDependencyException(
+            Exception exception)
+        {
+            var internViewDependencyException =
+                new InternViewDependencyException(
+                    message: "Intern View dependency error occurred, contact support.", 
+                        innerException: exception);
+
+            this.loggingBroker.LogError(internViewDependencyException);
+
+            return internViewDependencyException;
         }
     }
 }

@@ -80,7 +80,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
             var expectedDependencyException =
                 new InternViewDependencyException(
-                    message: "Intern View dependency validation error occurred, try again.",
+                    message: "Intern View dependency error occurred, contact support.",
                         innerException: internServiceDependencyException);
 
             this.internServiceMock.Setup(service =>
