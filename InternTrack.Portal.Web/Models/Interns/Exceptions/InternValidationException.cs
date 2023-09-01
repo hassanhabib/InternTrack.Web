@@ -15,6 +15,10 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
                   innerException)
         { }
 
+        public InternValidationException(string message, Exception innerException)
+            : base(message, innerException)
+        { }
+
         public InternValidationException(string message, Xeption innerException)
             : base(message, innerException)
         { }

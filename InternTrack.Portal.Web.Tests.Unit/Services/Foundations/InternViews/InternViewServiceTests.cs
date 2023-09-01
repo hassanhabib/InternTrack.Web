@@ -5,16 +5,18 @@
 
 using System;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using InternTrack.Portal.Web.Brokers.DateTimes;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
+using InternTrack.Portal.Web.Models.Interns.Exceptions;
+using InternTrack.Portal.Web.Models.InternViews;
 using InternTrack.Portal.Web.Services.Foundations.Interns;
 using InternTrack.Portal.Web.Services.Foundations.Users;
 using InternTrack.Portal.Web.Services.Views.InternViews;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
 using Tynamix.ObjectFiller;
+using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 {
@@ -44,6 +46,22 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 userService: this.userServiceMock.Object);
         }
 
+        public static TheoryData InternServiceValidationExceptions()
+        {
+            var innerException = new Exception();
+
+            return new TheoryData<Exception>
+            {
+                new InternValidationException(
+                    message: "Intern validation error occurred. Please, try again.",
+                        innerException),
+
+                new InternDependencyValidationException(
+                    message: "Intern dependency validation error occurred, please try again.",
+                        innerException)
+            };
+        }
+
         private static dynamic CreateRandomInternViewProperties(
             DateTimeOffset auditDates,
             Guid auditIds)
@@ -63,11 +81,11 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 JoinDate = auditDates,
                 CreatedBy = auditIds,
                 Updatedby = auditIds
-            };        
+            };
         }
 
         private Expression<Func<Intern, bool>> SameInternAs(
-            Intern expectedIntern) 
+            Intern expectedIntern)
         {
             return actualIntern => this.compareLogic.Compare(
                 expectedIntern,
@@ -83,5 +101,25 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
         private static string GetRandomString() =>
             new MnemonicString().GetValue();
+
+        private static InternView CreateRandomInternView() =>
+            CreateInternViewFiller().Create();
+
+        private Expression<Func<Exception, bool>> SameExceptionAs(
+            Exception expectedException)
+        {
+            return actualException => actualException.Message == expectedException.Message
+                && actualException.InnerException.Message == expectedException.InnerException.Message;
+        }
+
+        private static Filler<InternView> CreateInternViewFiller()
+        {
+            var filler = new Filler<InternView>();
+
+            filler.Setup()
+                .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+
+            return filler;
+        }
     }
 }
