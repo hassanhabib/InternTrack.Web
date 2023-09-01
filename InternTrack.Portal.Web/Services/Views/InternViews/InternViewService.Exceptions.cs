@@ -38,6 +38,23 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             {
                 throw CreateAndLogDependencyException(internServiceException);
             }
+            catch (Exception internServiceException)
+            {
+                throw CreateAndLogServiceException(internServiceException);
+            }
+        }
+
+        private InternViewServiceException CreateAndLogServiceException(
+            Exception exception)
+        {
+            var internViewServiceException =
+                new InternViewServiceException(
+                    message: "Intern View service error occurred, contact support.",
+                        innerException: exception);
+
+            this.loggingBroker.LogError(internViewServiceException);
+
+            return internViewServiceException;
         }
 
         private InternViewDependencyValidationException CreateAndLogDependencyValidationException(
