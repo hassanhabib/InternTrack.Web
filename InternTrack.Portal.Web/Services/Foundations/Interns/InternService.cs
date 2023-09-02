@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
+using Microsoft.Extensions.Hosting;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
@@ -42,7 +43,10 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         public ValueTask<List<Intern>> RetrieveAllInternsAsync() =>
         TryCatch(async () =>
         {
-            return await this.apiBroker.GetAllInternsAsync();
+            List<Intern> interns =
+                 await apiBroker.GetAllInternsAsync();
+
+            return interns;
         });  
     }
 }

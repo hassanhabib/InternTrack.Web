@@ -113,7 +113,31 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
         private async ValueTask<List<Intern>> TryCatch(ReturningInternsFunction returningFunction)
         {
-            return await returningFunction();    
+            try
+            {
+                return await returningFunction();
+            }
+            catch (HttpRequestException httpRequestException) 
+            {
+                var failedInternDependencyException =
+                    new FailedInternDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
+            }    
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+            {
+                var failedInternDependencyException =
+                    new FailedInternDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
+            }
+            catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
+            {
+                var failedInternDependencyException =
+                    new FailedInternDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
+            }
         }
 
         private InternValidationException CreateAndLogValidationException(Xeption exception)
