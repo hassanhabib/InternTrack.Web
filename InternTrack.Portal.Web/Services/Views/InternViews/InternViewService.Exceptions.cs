@@ -55,6 +55,10 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             {
                 returnNothingFunction();
             }
+            catch (InvalidInternViewException invalidInternViewException)
+            {
+                throw CreateAndLogValidationException(invalidInternViewException);
+            }
             catch (Exception serviceException)
             {
                 throw CreateAndLogServiceException(serviceException);

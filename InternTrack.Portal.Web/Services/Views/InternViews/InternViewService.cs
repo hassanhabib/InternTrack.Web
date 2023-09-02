@@ -50,6 +50,8 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
         public void NavigateTo(string route) =>
         TryCatch(() =>
         {
+            ValidateRoute(route);
+
             this.navigationBroker.NavigateTo(route);
         });
 

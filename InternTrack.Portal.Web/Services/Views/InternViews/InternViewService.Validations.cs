@@ -22,5 +22,23 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
                         innerException: innerException);
             }
         }
+
+        private static void ValidateRoute(string route)
+        {
+            if (IsInvalid(route))
+            {
+                var innerException = new Exception();
+                string parameterName = "Route";
+
+                throw new InvalidInternViewException(
+                        message: $"Invalid Intern View error occurred. " +
+                            $"parameter name: {parameterName}, " +
+                            $"parameter value: {route}",
+                                innerException);
+            }
+        }
+
+        private static bool IsInvalid(string text) => 
+            String.IsNullOrWhiteSpace(text);
     }
 }

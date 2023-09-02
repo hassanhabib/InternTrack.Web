@@ -74,7 +74,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         [InlineData(null)]
         [InlineData("")]
         [InlineData("    ")]
-        private void
+        private void 
             ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
            string invalidRoute)
         {
@@ -89,7 +89,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                             innerException);
 
             var expectedInternValidationException =
-                new InternValidationException(
+                new InternViewValidationException(
                     message: "Intern View validation error occurred, try again.",
                         innerException: invalidInternViewException);
 
@@ -97,8 +97,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             Action navigateToTask = () =>
                 this.internViewService.NavigateTo(invalidRoute);
 
-            InternValidationException actualInternValidationException =
-                Assert.Throws<InternValidationException>(navigateToTask);
+            InternViewValidationException actualInternValidationException =
+                Assert.Throws<InternViewValidationException>(navigateToTask);
 
             // then
             actualInternValidationException.Should()
