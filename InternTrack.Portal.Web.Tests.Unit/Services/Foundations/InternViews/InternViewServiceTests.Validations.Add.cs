@@ -12,6 +12,7 @@ using Xunit;
 using FluentAssertions;
 using Moq;
 using InternTrack.Portal.Web.Models.Interns;
+using Microsoft.AspNetCore.Components;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 {
@@ -67,6 +68,56 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("    ")]
+        private void
+            ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
+           string invalidRoute)
+        {
+            // given
+            var innerException = new Exception();
+
+            var invalidInternViewException =
+                new InvalidInternViewException(
+                    message: $"Invalid Intern View error occurred. " +
+                        $"parameter name: Route, " +
+                        $"parameter value: {invalidRoute}",
+                            innerException);
+
+            var expectedInternValidationException =
+                new InternValidationException(
+                    message: "Intern View validation error occurred, try again.",
+                        innerException: invalidInternViewException);
+
+            // when
+            Action navigateToTask = () =>
+                this.internViewService.NavigateTo(invalidRoute);
+
+            InternValidationException actualInternValidationException =
+                Assert.Throws<InternValidationException>(navigateToTask);
+
+            // then
+            actualInternValidationException.Should()
+                .BeEquivalentTo(expectedInternValidationException);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternValidationException))),
+                        Times.Once);
+
+            this.navigationBrokerMock.Verify(broker =>
+                broker.NavigateTo(It.IsAny<string>()),
+                    Times.Never);
+
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.internServiceMock.VerifyNoOtherCalls();
         }
     }
 }
