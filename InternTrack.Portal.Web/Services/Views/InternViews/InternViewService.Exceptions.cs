@@ -23,6 +23,10 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             {
                 return await returningInternViewFunction();
             }
+            catch (NullInternViewException nullInternViewException)
+            {
+                throw CreateAndLogValidationException(nullInternViewException);
+            }
             catch (InternValidationException internValidationException)
             {
                 throw CreateAndLogDependencyValidationException(internValidationException);
@@ -55,6 +59,19 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             {
                 throw CreateAndLogServiceException(serviceException);
             }
+        }
+
+        private Exception CreateAndLogValidationException(
+            Exception exception)
+        {
+            var internValidationException =
+                new InternViewValidationException(
+                    message: "Intern View validation error occurred, try again.",
+                        innerException: exception);
+
+            this.loggingBroker.LogError(internValidationException);
+
+            return internValidationException;
         }
 
         private InternViewServiceException CreateAndLogServiceException(
