@@ -39,7 +39,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
 
         public ValueTask<InternView> AddInternViewAsync(InternView internView) =>
         TryCatch(async () =>
-            {
+        {
             ValidateInternView(internView);
             Intern mappedIntern = MapToIntern(internView);
             await this.internService.AddInternAsync(mappedIntern);
