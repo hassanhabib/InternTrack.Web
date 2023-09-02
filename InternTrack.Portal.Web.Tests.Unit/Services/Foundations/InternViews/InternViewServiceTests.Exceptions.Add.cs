@@ -175,7 +175,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         }
 
         [Fact]
-        private void ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
+        private void 
+            ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
         {
             // given
             string someRoute = GetRandomRoute();

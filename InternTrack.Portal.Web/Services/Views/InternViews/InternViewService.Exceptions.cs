@@ -14,6 +14,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
     public partial class InternViewService
     {
         private delegate ValueTask<InternView> ReturningInternViewFunction();
+        private delegate void ReturningNothingFunction();
 
         private async ValueTask<InternView> TryCatch(
             ReturningInternViewFunction returningInternViewFunction)
@@ -41,6 +42,18 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             catch (Exception internServiceException)
             {
                 throw CreateAndLogServiceException(internServiceException);
+            }
+        }
+
+        private void TryCatch(ReturningNothingFunction returnNothingFunction)
+        {
+            try
+            {
+                returnNothingFunction();
+            }
+            catch (Exception serviceException)
+            {
+                throw CreateAndLogServiceException(serviceException);
             }
         }
 

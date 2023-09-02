@@ -46,7 +46,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 internService: this.internServiceMock.Object,
                 dateTimeBroker: this.dateTimeBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object,
-                userService: this.userServiceMock.Object);            
+                userService: this.userServiceMock.Object,
+                navigationBroker: this.navigationBrokerMock.Object);            
         }
 
         public static TheoryData InternServiceValidationExceptions()

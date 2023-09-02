@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.DateTimes;
 using InternTrack.Portal.Web.Brokers.Loggings;
+using InternTrack.Portal.Web.Brokers.Navigations;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.InternViews;
 using InternTrack.Portal.Web.Services.Foundations.Interns;
@@ -20,17 +21,20 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
         private readonly IUserService userService;
         private readonly IDateTimeBroker dateTimeBroker;
         private readonly ILoggingBroker loggingBroker;
+        private readonly INavigationBroker navigationBroker;
 
         public InternViewService(
             IInternService internService,
             IDateTimeBroker dateTimeBroker,
             ILoggingBroker loggingBroker,
-            IUserService userService)
+            IUserService userService,
+            INavigationBroker navigationBroker)
         {
             this.internService = internService;
             this.dateTimeBroker = dateTimeBroker;
             this.loggingBroker = loggingBroker;
             this.userService = userService;
+            this.navigationBroker = navigationBroker;
         }
 
         public ValueTask<InternView> AddInternViewAsync(InternView internView) =>
@@ -43,10 +47,11 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
                 return internView;
             });
 
-        public void NavigateTo(string route)
+        public void NavigateTo(string route) =>
+        TryCatch(() =>
         {
-            throw new NotImplementedException();
-        }
+            this.navigationBroker.NavigateTo(route);
+        });
 
         private Intern MapToIntern(InternView internView)
         {
