@@ -5,14 +5,13 @@
 
 using System;
 using System.Threading.Tasks;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
-using InternTrack.Portal.Web.Models.InternViews.Exceptions;
-using InternTrack.Portal.Web.Models.InternViews;
-using Xunit;
 using FluentAssertions;
-using Moq;
 using InternTrack.Portal.Web.Models.Interns;
-using Microsoft.AspNetCore.Components;
+using InternTrack.Portal.Web.Models.Interns.Exceptions;
+using InternTrack.Portal.Web.Models.InternViews;
+using InternTrack.Portal.Web.Models.InternViews.Exceptions;
+using Moq;
+using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 {
@@ -74,7 +73,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         [InlineData(null)]
         [InlineData("")]
         [InlineData("    ")]
-        private void 
+        private void
             ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
            string invalidRoute)
         {

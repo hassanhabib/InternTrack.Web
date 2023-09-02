@@ -4,7 +4,6 @@
 // -------------------------------------------------------
 
 using System;
-using System.Security.Cryptography.Xml;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
@@ -92,7 +91,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
             this.internServiceMock.Verify(service =>
                 service.AddInternAsync(It.Is(
-                    SameInternAs(expectedInputIntern))), 
+                    SameInternAs(expectedInputIntern))),
                         Times.Once);
 
             this.dateTimeBrokerMock.VerifyNoOtherCalls();

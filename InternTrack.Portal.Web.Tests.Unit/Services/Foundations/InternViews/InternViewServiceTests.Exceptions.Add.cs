@@ -71,7 +71,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
         [Theory]
         [MemberData(nameof(InternServiceDependencyExceptions))]
-        private async Task 
+        private async Task
             ShouldThrowDependencyExceptionOnAddIfInternDependencyErrorOccurredAndLogItAsync(
             Exception internServiceDependencyException)
         {
@@ -123,7 +123,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         }
 
         [Fact]
-        private async Task 
+        private async Task
             ShouldThrowServiceExceptionOnAddIfServiceErrorOccurredAndLogItAsync()
         {
             // given
@@ -132,7 +132,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
             var expectedInternServiceException =
                 new InternViewServiceException(
-                    message: "Intern View service error occurred, contact support.", 
+                    message: "Intern View service error occurred, contact support.",
                         innerException: serviceException);
 
             this.internServiceMock.Setup(service =>
@@ -158,7 +158,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.dateTimeBrokerMock.Verify(broker =>
                 broker.GetCurrentDateTimeOffset(),
                     Times.Once);
-                        
+
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedInternServiceException))),
@@ -175,7 +175,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         }
 
         [Fact]
-        private void 
+        private void
             ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
         {
             // given
