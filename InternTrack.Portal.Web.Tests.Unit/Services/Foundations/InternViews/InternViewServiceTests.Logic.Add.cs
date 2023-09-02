@@ -98,6 +98,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
     }
 }

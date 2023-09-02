@@ -67,6 +67,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Theory]
@@ -120,6 +121,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -172,6 +174,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Fact]
