@@ -11,5 +11,6 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
     public interface IInternViewService
     {
         ValueTask<InternView> AddInternViewAsync(InternView internView);
+        void NavigateTo(string route);
     }
 }

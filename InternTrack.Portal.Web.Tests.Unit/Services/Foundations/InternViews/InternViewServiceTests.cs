@@ -7,6 +7,7 @@ using System;
 using System.Linq.Expressions;
 using InternTrack.Portal.Web.Brokers.DateTimes;
 using InternTrack.Portal.Web.Brokers.Loggings;
+using InternTrack.Portal.Web.Brokers.Navigations;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using InternTrack.Portal.Web.Models.InternViews;
@@ -26,6 +27,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         private readonly Mock<IUserService> userServiceMock;
         private readonly Mock<IDateTimeBroker> dateTimeBrokerMock;
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
+        private readonly Mock<INavigationBroker> navigationBrokerMock;
         private readonly ICompareLogic compareLogic;
         private readonly IInternViewService internViewService;
 
@@ -35,6 +37,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.userServiceMock = new Mock<IUserService>();
             this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
+            this.navigationBrokerMock = new Mock<INavigationBroker>();
             var compareConfig = new ComparisonConfig();
             compareConfig.IgnoreProperty<Intern>(intern => intern.Id);
             this.compareLogic = new CompareLogic(compareConfig);
@@ -43,7 +46,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 internService: this.internServiceMock.Object,
                 dateTimeBroker: this.dateTimeBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object,
-                userService: this.userServiceMock.Object);
+                userService: this.userServiceMock.Object);            
         }
 
         public static TheoryData InternServiceValidationExceptions()
@@ -117,6 +120,10 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
         private static string GetRandomString() =>
             new MnemonicString().GetValue();
+
+        private static string GetRandomRoute() =>
+            new RandomUrl().GetValue();
+
 
         private static InternView CreateRandomInternView() =>
             CreateInternViewFiller().Create();

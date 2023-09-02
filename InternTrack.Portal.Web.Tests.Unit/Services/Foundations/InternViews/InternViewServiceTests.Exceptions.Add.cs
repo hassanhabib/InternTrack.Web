@@ -173,5 +173,48 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        private async void ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
+        {
+            // given
+            string someRoute = GetRandomRoute();
+            Exception serviceException = new Exception();
+
+            var expectedInternServiceException =
+               new InternViewServiceException(
+                   message: "Intern View service error occurred, contact support.",
+                       innerException: serviceException);
+
+            this.navigationBrokerMock.Setup(broker =>
+                broker.NavigateTo(It.IsAny<string>()))
+                    .Throws(serviceException);
+
+            // when
+            Action navigationToAction = () =>
+                this.internViewService.NavigateTo(someRoute);
+
+            InternViewServiceException actualInternServiceException =
+                Assert.Throws<InternViewServiceException>(navigationToAction);
+
+            //then
+            actualInternServiceException.Should()
+                .BeEquivalentTo(expectedInternServiceException);
+
+            this.navigationBrokerMock.Verify(broker =>
+                broker.NavigateTo(It.IsAny<string>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternServiceException))),
+                        Times.Once);
+
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.internServiceMock.VerifyNoOtherCalls();
+        }
     }
 }

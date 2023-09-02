@@ -43,6 +43,11 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
                 return internView;
             });
 
+        public void NavigateTo(string route)
+        {
+            throw new NotImplementedException();
+        }
+
         private Intern MapToIntern(InternView internView)
         {
             Guid currentLoggedInUserId = this.userService.GetCurrentlyLoggedInUser();
