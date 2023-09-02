@@ -74,7 +74,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         [MemberData(nameof(InternServiceDependencyExceptions))]
         private async Task
             ShouldThrowDependencyExceptionOnAddIfInternDependencyErrorOccurredAndLogItAsync(
-            Exception internServiceDependencyException)
+                Exception internServiceDependencyException)
         {
             // given
             InternView someInternView = CreateRandomInternView();

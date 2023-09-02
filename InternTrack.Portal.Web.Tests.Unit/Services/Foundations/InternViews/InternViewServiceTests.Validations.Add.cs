@@ -75,7 +75,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         [InlineData("    ")]
         private void
             ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
-           string invalidRoute)
+                string invalidRoute)
         {
             // given
             var innerException = new Exception();
