@@ -6,11 +6,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using Moq;
+using RESTFulSense.Exceptions;
 using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
@@ -55,5 +57,48 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-    }
+        [Fact]
+        public async Task ShouldThrowDependencyExceptionOnretrieveAllIfDependencyApiErrorOccursAndLogItAsync()
+        {
+            // given
+            var randomExceptionMessage = GetRandomMessage();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseException =
+                new HttpResponseException(
+                    responseMessage,
+                    randomExceptionMessage);
+
+            var failedInternDependencyException =
+                new FailedInternDependencyException(httpResponseException);
+
+            var expectedDependencyException =
+                new InternDependencyException(
+                    failedInternDependencyException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllInternsAsync())
+                    .ThrowsAsync(httpResponseException);
+
+            // when
+            ValueTask<List<Intern>> retrieveAllInternsTask =
+                internService.RetrieveAllInternsAsync();
+
+            // then
+            await Assert.ThrowsAsync<InternDependencyException>(() =>
+                retrieveAllInternsTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetAllInternsAsync(), 
+                    Times.Once());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedDependencyException))),
+                        Times.Once());
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+    }   
 }
