@@ -84,8 +84,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 new InvalidInternViewException(
                     message: $"Invalid Intern View error occurred. " +
                         $"parameter name: Route, " +
-                        $"parameter value: {invalidRoute}",
-                            innerException);
+                            $"parameter value: {invalidRoute}",
+                                innerException);
 
             var expectedInternValidationException =
                 new InternViewValidationException(

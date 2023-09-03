@@ -108,9 +108,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
             Intern expectedIntern)
         {
             return actualIntern => this.compareLogic.Compare(
-                expectedIntern,
-                    actualIntern)
-                        .AreEqual;
+                expectedIntern, actualIntern).AreEqual;
         }
 
         private static string GetRandomName() =>

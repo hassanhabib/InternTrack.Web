@@ -31,8 +31,8 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
                 string parameterName = "Route";
 
                 throw new InvalidInternViewException(
-                        message: $"Invalid Intern View error occurred. " +
-                            $"parameter name: {parameterName}, " +
+                    message: $"Invalid Intern View error occurred. " +
+                        $"parameter name: {parameterName}, " +
                             $"parameter value: {route}",
                                 innerException);
             }
