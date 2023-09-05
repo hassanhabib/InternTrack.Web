@@ -176,5 +176,57 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task
+            ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsLockedAndLogItAsync()
+        {
+            Guid someInternId = Guid.NewGuid();
+            string someMessage = GetRandomMessage();
+            var httpResponseMessage = new HttpResponseMessage();
+
+            var httpResponseLockedException =
+                new HttpResponseLockedException(
+                    httpResponseMessage,
+                        someMessage);
+
+            var lockedInternException =
+                new LockedInternException(
+                    message: "Locked Intern error occurred, please try again later.",
+                     innerException: httpResponseLockedException);
+
+            var expectedInternDependencyValidationException =
+                new InternDependencyValidationException(
+                    message: "Intern dependency validation error occurred, please try again.",
+                        innerException: lockedInternException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
+                    .ThrowsAsync(httpResponseLockedException);
+
+            //when
+            ValueTask<Intern> removeInternByIdTask =
+                this.internService.RemoveInternByIdAsync(someInternId);
+
+            InternDependencyValidationException actualInternDependencyValidationException =
+                await Assert.ThrowsAsync<InternDependencyValidationException>(
+                    removeInternByIdTask.AsTask);
+
+            //then
+            actualInternDependencyValidationException.Should()
+                .BeEquivalentTo(expectedInternDependencyValidationException);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
+                 Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternDependencyValidationException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
