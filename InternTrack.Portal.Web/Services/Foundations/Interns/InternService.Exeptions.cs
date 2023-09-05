@@ -98,6 +98,15 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogDependencyValidationException(invalidInternException);
             }
+            catch (HttpResponseLockedException httpLockedException)
+            {
+                var lockedInternException =
+                    new LockedInternException(
+                        message: "Locked Intern error occurred, please try again later.", 
+                            innerException: httpLockedException);
+
+                throw CreateAndLogDependencyValidationException(lockedInternException);
+            }
             catch (HttpResponseException httpResponseException)
             {
                 var failedInternDependencyException =
