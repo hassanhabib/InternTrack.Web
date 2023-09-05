@@ -270,11 +270,57 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
-                 Times.Once);
+                    Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedInternDependencyException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        private async Task
+            ShouldThrowServiceExceptionOnRemoveIfServiceErrorOccursAndLogItAsync()
+        {
+            Guid someInternId = Guid.NewGuid();
+            var serviceException = new Exception();
+
+            var failedInternServiceException =
+                new FailedInternServiceException(
+                    message: "Failed Intern service error occurred, contact support.",
+                        innerException: serviceException);
+
+            var expectedInternServiceException =
+                new InternServiceException(
+                    message: "Intern service error occurred, contact support.",
+                        innerException: failedInternServiceException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
+                    .ThrowsAsync(serviceException);
+
+            //when
+            ValueTask<Intern> removeInternByIdTask =
+                this.internService.RemoveInternByIdAsync(someInternId);
+
+            InternServiceException actualInternServiceException =
+                await Assert.ThrowsAsync<InternServiceException>(() =>
+                    removeInternByIdTask.AsTask());
+
+            //then
+            actualInternServiceException.Should()
+                .BeEquivalentTo(expectedInternServiceException);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternServiceException))),
                         Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();
