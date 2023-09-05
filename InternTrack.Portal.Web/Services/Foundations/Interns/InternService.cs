@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
-using Microsoft.VisualBasic;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
