@@ -78,6 +78,16 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogDependencyValidationException(notFoundInternException);
             }
+            catch (HttpResponseBadRequestException httpResponseBadRequestException)
+            {
+                var invalidInternException =
+                    new InvalidInternException(
+                        message: "Invalid Intern error occurred. Please correct the errors and try again.",
+                            innerException: httpResponseBadRequestException,
+                                data: httpResponseBadRequestException.Data);
+
+                throw CreateAndLogDependencyValidationException(invalidInternException);
+            }
             catch (HttpResponseConflictException httpResponseConflictException)
             {
                 var invalidInternException =
