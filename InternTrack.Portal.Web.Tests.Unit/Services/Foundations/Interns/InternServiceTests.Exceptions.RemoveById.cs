@@ -13,6 +13,7 @@ using Moq;
 using FluentAssertions;
 using RESTFulSense.Exceptions;
 using System.Net.Http;
+using System.Collections;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -95,6 +96,63 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     .ThrowsAsync(httpResponseNotFoundException);
 
             // when
+            ValueTask<Intern> removeInternByIdTask =
+                this.internService.RemoveInternByIdAsync(someInternId);
+
+            InternDependencyValidationException actualInternDependencyValidationException =
+                await Assert.ThrowsAsync<InternDependencyValidationException>(
+                    removeInternByIdTask.AsTask);
+
+            //then
+            actualInternDependencyValidationException.Should()
+                .BeEquivalentTo(expectedInternDependencyValidationException);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
+                 Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternDependencyValidationException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        private async Task
+            ShouldThrowDependencyValidationExceptionOnRemoveIfValidationErrorOccursAndLogItAsync()
+        {
+            Guid someInternId = Guid.NewGuid();
+            IDictionary randomDictionary = CreateRandomDictionary();
+            IDictionary exceptionData = randomDictionary;
+            string someMessage = GetRandomMessage();
+            var someResponseMessage = new HttpResponseMessage();
+
+            var httpResponseBadRequestException =
+                new HttpResponseBadRequestException(
+                    someResponseMessage,
+                        someMessage);
+
+            httpResponseBadRequestException.AddData(exceptionData);
+
+            var invalidInternException =
+                new InvalidInternException(
+                    message: "Invalid Intern error occurred. Please correct the errors and try again.",
+                        innerException: httpResponseBadRequestException,
+                            data: exceptionData);
+
+            var expectedInternDependencyValidationException =
+                new InternDependencyValidationException(
+                    message: "Intern dependency validation error occurred, please try again.",
+                        innerException: invalidInternException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
+                    .ThrowsAsync(httpResponseBadRequestException);
+
+            //when
             ValueTask<Intern> removeInternByIdTask =
                 this.internService.RemoveInternByIdAsync(someInternId);
 
