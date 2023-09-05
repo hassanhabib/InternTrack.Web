@@ -56,7 +56,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
-                 Times.Once);
+                    Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogCritical(It.Is(SameExceptionAs(
@@ -109,7 +109,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
-                 Times.Once);
+                    Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
@@ -124,6 +124,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task
             ShouldThrowDependencyValidationExceptionOnRemoveIfValidationErrorOccursAndLogItAsync()
         {
+            // given
             Guid someInternId = Guid.NewGuid();
             IDictionary randomDictionary = CreateRandomDictionary();
             IDictionary exceptionData = randomDictionary;
@@ -166,7 +167,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
-                 Times.Once);
+                    Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
@@ -181,6 +182,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task
             ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsLockedAndLogItAsync()
         {
+            // given
             Guid someInternId = Guid.NewGuid();
             string someMessage = GetRandomMessage();
             var httpResponseMessage = new HttpResponseMessage();
@@ -193,7 +195,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var lockedInternException =
                 new LockedInternException(
                     message: "Locked Intern error occurred, please try again later.",
-                     innerException: httpResponseLockedException);
+                        innerException: httpResponseLockedException);
 
             var expectedInternDependencyValidationException =
                 new InternDependencyValidationException(
@@ -218,7 +220,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
-                 Times.Once);
+                    Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
@@ -233,6 +235,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task
             ShouldThrowInternDependencyExceptionOnRemoveIfDependencyErrorOccursAndLogItAsync()
         {
+            // given
             Guid someInternId = Guid.NewGuid();
             string someMessage = GetRandomMessage();
             var httpResponseMessage = new HttpResponseMessage();
@@ -285,6 +288,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task
             ShouldThrowServiceExceptionOnRemoveIfServiceErrorOccursAndLogItAsync()
         {
+            // given
             Guid someInternId = Guid.NewGuid();
             var serviceException = new Exception();
 
