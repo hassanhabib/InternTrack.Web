@@ -178,7 +178,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task
+        private async Task
             ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsLockedAndLogItAsync()
         {
             Guid someInternId = Guid.NewGuid();
@@ -223,6 +223,58 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedInternDependencyValidationException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        private async Task
+            ShouldThrowInternDependencyExceptionOnRemoveIfDependencyErrorOccursAndLogItAsync()
+        {
+            Guid someInternId = Guid.NewGuid();
+            string someMessage = GetRandomMessage();
+            var httpResponseMessage = new HttpResponseMessage();
+
+            var httpResponseException =
+                new HttpResponseException(
+                    httpResponseMessage,
+                        someMessage);
+
+            var failedInternDependencyException =
+                new FailedInternDependencyException(
+                    message: "Failed Intern dependency error occurred, contact support.",
+                        innerException: httpResponseException);
+
+            var expectedInternDependencyException =
+                new InternDependencyException(
+                    message: "Intern dependency error occurred, contact support.",
+                        innerException: failedInternDependencyException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
+                    .ThrowsAsync(httpResponseException);
+
+            //when
+            ValueTask<Intern> removeInternByIdTask =
+                this.internService.RemoveInternByIdAsync(someInternId);
+
+            InternDependencyException actualInternDependencyException =
+                await Assert.ThrowsAsync<InternDependencyException>(() =>
+                    removeInternByIdTask.AsTask());
+
+            //then
+            actualInternDependencyException.Should()
+                .BeEquivalentTo(expectedInternDependencyException);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.DeleteInternByIdAsync(It.IsAny<Guid>()),
+                 Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternDependencyException))),
                         Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();

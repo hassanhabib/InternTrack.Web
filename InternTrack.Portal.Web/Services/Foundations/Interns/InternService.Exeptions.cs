@@ -107,15 +107,6 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogDependencyValidationException(lockedInternException);
             }
-            catch (HttpResponseException httpResponseException)
-            {
-                var failedInternDependencyException =
-                    new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.",
-                            innerException: httpResponseException);
-
-                throw CreateAndLogDependencyException(failedInternDependencyException);
-            }
             catch (Exception exception)
             {
                 var failedInternServiceException =
