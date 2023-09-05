@@ -38,5 +38,10 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
             return await this.apiBroker.GetInternByIdAsync(internId);
         });
+
+        public ValueTask<Intern> RemoveInternByIdAsync(Guid internId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
