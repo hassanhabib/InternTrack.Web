@@ -71,6 +71,13 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
             }
+            catch (HttpResponseNotFoundException httpResponseNotFoundException)
+            {
+                var notFoundInternException =
+                    new NotFoundInternException(httpResponseNotFoundException);
+
+                throw CreateAndLogDependencyValidationException(notFoundInternException);
+            }
             catch (HttpResponseBadRequestException httpResponseBadRequestException)
             {
                 var invalidInternException =

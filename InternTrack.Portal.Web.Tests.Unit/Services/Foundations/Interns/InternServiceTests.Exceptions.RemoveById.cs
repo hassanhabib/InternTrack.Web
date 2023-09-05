@@ -111,7 +111,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                  Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogCritical(It.Is(SameExceptionAs(
+                broker.LogError(It.Is(SameExceptionAs(
                     expectedInternDependencyValidationException))),
                         Times.Once);
 
