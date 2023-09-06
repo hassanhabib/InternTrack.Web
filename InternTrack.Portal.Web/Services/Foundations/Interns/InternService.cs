@@ -41,12 +41,6 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         });
 
         public ValueTask<List<Intern>> RetrieveAllInternsAsync() =>
-        TryCatch(async () =>
-        {
-            List<Intern> interns =
-                 await apiBroker.GetAllInternsAsync();
-
-            return interns;
-        });  
+       TryCatch(async () => await apiBroker.GetAllInternsAsync());
     }
 }

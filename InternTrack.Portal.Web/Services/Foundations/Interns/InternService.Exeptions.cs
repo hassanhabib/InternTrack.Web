@@ -62,11 +62,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
             }
-            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException) 
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             {
                 var failedInternDependencyException =
                     new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.", 
+                        message: "Failed Intern dependency error occurred, contact support.",
                             innerException: httpResponseUrlNotFoundException);
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
@@ -99,7 +99,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
                             innerException: httpResponseException);
 
                 throw CreateAndLogDependencyException(failedInternDependencyException);
-            }
+            }          
             catch (Exception exception)
             {
                 var failedInternServiceException =

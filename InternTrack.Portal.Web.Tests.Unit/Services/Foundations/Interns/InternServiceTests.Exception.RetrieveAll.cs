@@ -45,7 +45,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 retrieveAllInternsTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
-                broker.GetAllInternsAsync(), 
+                broker.GetAllInternsAsync(),
                     Times.Once());
 
             this.loggingBrokerMock.Verify(broker =>
@@ -70,11 +70,14 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     randomExceptionMessage);
 
             var failedInternDependencyException =
-                new FailedInternDependencyException(httpResponseException);
+                new FailedInternDependencyException(
+                    message: "Failed Intern dependency error occurred, contact support.",
+                        innerException: httpResponseException);
 
             var expectedDependencyException =
                 new InternDependencyException(
-                    failedInternDependencyException);
+                    message: "Failed Intern dependency error occurred, contact support.",
+                        innerException: failedInternDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllInternsAsync())
@@ -89,7 +92,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 retrieveAllInternsTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
-                broker.GetAllInternsAsync(), 
+                broker.GetAllInternsAsync(),
                     Times.Once());
 
             this.loggingBrokerMock.Verify(broker =>
@@ -100,5 +103,5 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
-    }   
+    }
 }
