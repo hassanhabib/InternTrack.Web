@@ -21,17 +21,19 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
+        private async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
             // given
             var failedInternDependencyException =
                 new FailedInternDependencyException(
-                    criticalDependencyException);
+                    message: "Failed Intern dependency error occurred, contact support.",
+                        innerException: criticalDependencyException);
 
             var expectedInternDependencyException =
                 new InternDependencyException(
-                    failedInternDependencyException);
+                    message: "Intern dependency error occurred, contact support.",
+                        innerException:failedInternDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllInternsAsync())
