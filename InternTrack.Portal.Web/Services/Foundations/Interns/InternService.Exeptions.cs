@@ -138,6 +138,13 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
             }
+            catch (HttpResponseException httpResponseException)
+            {
+                var failedInternDependencyException =
+                    new FailedInternDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedInternDependencyException);
+            }
         }
 
         private InternValidationException CreateAndLogValidationException(Xeption exception)

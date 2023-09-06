@@ -26,7 +26,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         {
             // given
             var failedInternDependencyException =
-                new FailedInternDependencyException(criticalDependencyException);
+                new FailedInternDependencyException(
+                    criticalDependencyException);
 
             var expectedInternDependencyException =
                 new InternDependencyException(
@@ -58,7 +59,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowDependencyExceptionOnretrieveAllIfDependencyApiErrorOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyExceptionOnretrieveAllIfDependencyApiErrorOccursAndLogItAsync()
         {
             // given
             var randomExceptionMessage = GetRandomMessage();
@@ -76,7 +77,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var expectedDependencyException =
                 new InternDependencyException(
-                    message: "Failed Intern dependency error occurred, contact support.",
+                    message: "Intern dependency error occurred, contact support.",
                         innerException: failedInternDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
