@@ -21,8 +21,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        private async Task
-            ShouldThrowCriticalDependencyExceptionOnRemoveIfCriticalErrorOccursAndLogItAsync(
+        private async Task ShouldThrowCriticalDependencyExceptionOnRemoveIfCriticalErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
             // given
@@ -68,8 +67,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsNotFoundAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsNotFoundAndLogItAsync()
         {
             // given
             Guid someInternId = Guid.NewGuid();
@@ -121,8 +119,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowDependencyValidationExceptionOnRemoveIfValidationErrorOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnRemoveIfValidationErrorOccursAndLogItAsync()
         {
             // given
             Guid someInternId = Guid.NewGuid();
@@ -179,8 +176,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsLockedAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnRemoveIfInternIsLockedAndLogItAsync()
         {
             // given
             Guid someInternId = Guid.NewGuid();
@@ -206,7 +202,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(httpResponseLockedException);
 
-            //when
+            // when
             ValueTask<Intern> removeInternByIdTask =
                 this.internService.RemoveInternByIdAsync(someInternId);
 
@@ -214,7 +210,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyValidationException>(
                     removeInternByIdTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyValidationException.Should()
                 .BeEquivalentTo(expectedInternDependencyValidationException);
 
@@ -232,8 +228,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowInternDependencyExceptionOnRemoveIfDependencyErrorOccursAndLogItAsync()
+        private async Task ShouldThrowInternDependencyExceptionOnRemoveIfDependencyErrorOccursAndLogItAsync()
         {
             // given
             Guid someInternId = Guid.NewGuid();
@@ -259,7 +254,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(httpResponseException);
 
-            //when
+            // when
             ValueTask<Intern> removeInternByIdTask =
                 this.internService.RemoveInternByIdAsync(someInternId);
 
@@ -267,7 +262,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyException>(() =>
                     removeInternByIdTask.AsTask());
 
-            //then
+            // then
             actualInternDependencyException.Should()
                 .BeEquivalentTo(expectedInternDependencyException);
 
@@ -285,8 +280,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowServiceExceptionOnRemoveIfServiceErrorOccursAndLogItAsync()
+        private async Task ShouldThrowServiceExceptionOnRemoveIfServiceErrorOccursAndLogItAsync()
         {
             // given
             Guid someInternId = Guid.NewGuid();
@@ -306,7 +300,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(serviceException);
 
-            //when
+            // when
             ValueTask<Intern> removeInternByIdTask =
                 this.internService.RemoveInternByIdAsync(someInternId);
 
@@ -314,7 +308,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternServiceException>(() =>
                     removeInternByIdTask.AsTask());
 
-            //then
+            // then
             actualInternServiceException.Should()
                 .BeEquivalentTo(expectedInternServiceException);
 

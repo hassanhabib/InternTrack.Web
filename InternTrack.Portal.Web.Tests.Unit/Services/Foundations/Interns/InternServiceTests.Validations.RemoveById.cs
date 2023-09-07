@@ -16,8 +16,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     public partial class InternServiceTests
     {
         [Fact]
-        private async void
-            ShouldThrowValidationExceptionOnRemoveIfIdIsInvalidAndLogItAsync()
+        private async void ShouldThrowValidationExceptionOnRemoveIfIdIsInvalidAndLogItAsync()
         {
             // given
             Guid invalidInternId = Guid.Empty;
