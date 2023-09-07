@@ -11,7 +11,7 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
     public class FailedInternServiceException : Xeption
     {
         public FailedInternServiceException(Exception innerException)
-            : base(message: "Failed Intern service error occurred, contact support",
+            : base(message: "Failed Intern service error occurred, contact support.",
                   innerException)
         { }
 
