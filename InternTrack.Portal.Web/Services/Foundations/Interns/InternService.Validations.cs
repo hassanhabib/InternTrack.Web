@@ -1,6 +1,4 @@
 using System;
-using System.Data;
-using System.Reflection.Metadata;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 

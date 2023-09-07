@@ -4,8 +4,8 @@
 // ---------------------------------------------------------------
 
 using System;
-using FluentAssertions;
 using System.Threading.Tasks;
+using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using Moq;

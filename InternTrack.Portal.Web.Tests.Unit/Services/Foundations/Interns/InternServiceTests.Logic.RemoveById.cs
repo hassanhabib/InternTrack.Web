@@ -4,7 +4,6 @@
 // ---------------------------------------------------------------
 
 using System;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Force.DeepCloner;
 using InternTrack.Portal.Web.Models.Interns;
@@ -38,7 +37,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             actualIntern.Should().BeEquivalentTo(expectedIntern);
 
             this.apiBrokerMock.Verify(broker =>
-                broker.DeleteInternByIdAsync(inputInternId), 
+                broker.DeleteInternByIdAsync(inputInternId),
                     Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();

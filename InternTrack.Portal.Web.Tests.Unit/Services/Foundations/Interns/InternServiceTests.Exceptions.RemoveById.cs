@@ -4,16 +4,16 @@
 // ---------------------------------------------------------------
 
 
-using System.Threading.Tasks;
 using System;
-using Xunit;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
-using InternTrack.Portal.Web.Models.Interns;
-using Moq;
-using FluentAssertions;
-using RESTFulSense.Exceptions;
-using System.Net.Http;
 using System.Collections;
+using System.Net.Http;
+using System.Threading.Tasks;
+using FluentAssertions;
+using InternTrack.Portal.Web.Models.Interns;
+using InternTrack.Portal.Web.Models.Interns.Exceptions;
+using Moq;
+using RESTFulSense.Exceptions;
+using Xunit;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -21,7 +21,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        private async Task 
+        private async Task
             ShouldThrowCriticalDependencyExceptionOnRemoveIfCriticalErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
