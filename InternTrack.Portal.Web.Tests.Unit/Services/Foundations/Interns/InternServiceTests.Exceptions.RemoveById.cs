@@ -49,7 +49,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyException>(
                     removeInternByIdTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyException.Should()
                 .BeEquivalentTo(expectedInternDependencyException);
 
@@ -101,7 +101,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyValidationException>(
                     removeInternByIdTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyValidationException.Should()
                 .BeEquivalentTo(expectedInternDependencyValidationException);
 
@@ -150,7 +150,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.DeleteInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(httpResponseBadRequestException);
 
-            //when
+            // when
             ValueTask<Intern> removeInternByIdTask =
                 this.internService.RemoveInternByIdAsync(someInternId);
 
@@ -158,7 +158,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyValidationException>(
                     removeInternByIdTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyValidationException.Should()
                 .BeEquivalentTo(expectedInternDependencyValidationException);
 
