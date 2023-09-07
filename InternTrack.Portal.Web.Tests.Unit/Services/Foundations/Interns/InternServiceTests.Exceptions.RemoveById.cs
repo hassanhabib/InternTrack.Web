@@ -332,6 +332,3 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
     }
 }
-
-//"Failed Intern service error occurred, contact support.",
-//"Failed Intern service error occurred, contact support".
