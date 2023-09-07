@@ -13,11 +13,9 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
     {
         private static void ValidateInternView(InternView internView)
         {
-            var innerException = new Exception();
-
             if (internView == null)
             {
-                throw new NullInternViewException(innerException);
+                throw new NullInternViewException();
             }
         }
 

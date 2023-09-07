@@ -11,7 +11,7 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
     public class NotFoundInternException : Xeption
     {
         public NotFoundInternException(Exception innerException)
-        : base(message: "Not found Intern error occurred, please try again.",
+            : base(message: "Not found Intern error occurred, please try again.",
                   innerException)
         { }
 

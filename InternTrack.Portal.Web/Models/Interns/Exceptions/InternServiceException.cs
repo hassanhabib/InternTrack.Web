@@ -15,12 +15,12 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
                   innerException)
         { }
 
-        public InternServiceException(string message, Exception innerException) :
-            base(message, innerException)
+        public InternServiceException(string message, Exception innerException) 
+            : base(message, innerException)
         { }
 
-        public InternServiceException(string message, Xeption innerException) :
-            base(message, innerException)
+        public InternServiceException(string message, Xeption innerException) 
+            : base(message, innerException)
         { }
     }
 }

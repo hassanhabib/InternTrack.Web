@@ -11,7 +11,8 @@ namespace InternTrack.Portal.Web.Models.InternViews.Exceptions
     public class InternViewDependencyException : Xeption
     {
         public InternViewDependencyException(Exception innerException)
-            : base(message: "Intern View dependency error occurred, contact support.", innerException)
+            : base(message: "Intern View dependency error occurred, contact support.",
+                  innerException)
         { }
 
         public InternViewDependencyException(string message, Exception innerException)

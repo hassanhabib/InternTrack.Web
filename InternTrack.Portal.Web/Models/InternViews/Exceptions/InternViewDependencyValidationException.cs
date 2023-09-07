@@ -11,7 +11,8 @@ namespace InternTrack.Portal.Web.Models.InternViews.Exceptions
     public class InternViewDependencyValidationException : Xeption
     {
         public InternViewDependencyValidationException(Exception innerException)
-            : base("Intern View dependency validation error occurred, try again.", innerException)
+            : base("Intern View dependency validation error occurred, try again.", 
+                  innerException)
         { }
 
         public InternViewDependencyValidationException(string message, Exception innerException)

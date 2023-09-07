@@ -18,8 +18,8 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
             : base(message: "The Intern is null.", innerException)
         { }
 
-        public NullInternException(string message, Exception innerException) :
-            base(message, innerException)
+        public NullInternException(string message, Exception innerException) 
+            : base(message, innerException)
         { }
     }
 }
