@@ -4,11 +4,8 @@
 // ---------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using RESTFulSense.Exceptions;
@@ -29,54 +26,50 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             catch (NullInternException nullInternException)
             {
                 var isNullInternException =
-                    new NullInternException(
-                        message: "The Intern is null.",
-                            innerException: nullInternException);
+                    new NullInternException(nullInternException);
 
                 throw CreateAndLogValidationException(nullInternException);
             }
             catch (InvalidInternException invalidInternException)
             {
                 var isInvalidInternException =
-                    new InvalidInternException(
-                        message: "Invalid Intern error occurred. Please correct the errors and try again.",
-                            innerException: invalidInternException);
+                    new InvalidInternException(invalidInternException);
 
                 throw CreateAndLogValidationException(invalidInternException);
             }
             catch (HttpRequestException httpRequestException)
             {
                 var failedInternDependencyException =
-                    new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.",
-                            innerException: httpRequestException);
+                    new FailedInternDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
+            }
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+            {
+                var failedInternDependencyException =
+                    new FailedInternDependencyException(httpResponseUrlNotFoundException);
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
             }
             catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             {
                 var failedInternDependencyException =
-                    new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.",
-                            innerException: httpResponseUnauthorizedException);
+                    new FailedInternDependencyException(httpResponseUnauthorizedException);
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
             }
-            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException) 
+            catch (HttpResponseNotFoundException httpResponseNotFoundException)
             {
-                var failedInternDependencyException =
-                    new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.", 
-                            innerException: httpResponseUrlNotFoundException);
+                var notFoundInternException =
+                    new NotFoundInternException(httpResponseNotFoundException);
 
-                throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
+                throw CreateAndLogDependencyValidationException(notFoundInternException);
             }
             catch (HttpResponseBadRequestException httpResponseBadRequestException)
             {
                 var invalidInternException =
                     new InvalidInternException(
-                        message: "Invalid Intern error occurred. Please correct the errors and try again.",
-                            innerException: httpResponseBadRequestException,
+                        innerException: httpResponseBadRequestException,
                                 data: httpResponseBadRequestException.Data);
 
                 throw CreateAndLogDependencyValidationException(invalidInternException);
@@ -85,86 +78,83 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             {
                 var invalidInternException =
                     new InvalidInternException(
-                        message: "Invalid Intern error occurred. Please correct the errors and try again.",
-                            innerException: httpResponseConflictException,
+                        innerException: httpResponseConflictException,
                                 data: httpResponseConflictException.Data);
 
                 throw CreateAndLogDependencyValidationException(invalidInternException);
             }
+            catch (HttpResponseLockedException httpLockedException)
+            {
+                var lockedInternException =
+                    new LockedInternException(httpLockedException);
+
+                throw CreateAndLogDependencyValidationException(lockedInternException);
+            }
             catch (HttpResponseException httpResponseException)
             {
                 var failedInternDependencyException =
-                    new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.",
-                            innerException: httpResponseException);
+                    new FailedInternDependencyException(httpResponseException);
 
                 throw CreateAndLogDependencyException(failedInternDependencyException);
             }
             catch (Exception exception)
             {
                 var failedInternServiceException =
-                    new FailedInternServiceException(
-                        message: "Failed Intern service error occurred, contact support.",
-                            innerException: exception);
+                    new FailedInternServiceException(exception);
 
                 throw CreateAndLogInternServiceException(failedInternServiceException);
             }
         }
 
-        private InternValidationException CreateAndLogValidationException(Xeption exception)
+        private InternValidationException
+            CreateAndLogValidationException(Xeption exception)
         {
             var internValidationException =
-                new InternValidationException(
-                    message: "Intern validation error occurred. Please, try again.",
-                        innerException: exception);
+                new InternValidationException(exception);
 
             this.loggingBroker.LogError(internValidationException);
 
             return internValidationException;
         }
 
-        private InternDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
+        private InternDependencyException
+            CreateAndLogCriticalDependencyException(Xeption exception)
         {
             var internDependencyException =
-                new InternDependencyException(
-                    message: "Intern dependency error occurred, contact support.",
-                        innerException: exception);
+                new InternDependencyException(exception);
 
             this.loggingBroker.LogCritical(internDependencyException);
 
             return internDependencyException;
         }
 
-        private InternDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+        private InternDependencyValidationException
+            CreateAndLogDependencyValidationException(Xeption exception)
         {
             var internDependencyValidationException =
-                new InternDependencyValidationException(
-                    message: "Intern dependency validation error occurred, please try again.",
-                        innerException: exception);
+                new InternDependencyValidationException(exception);
 
             this.loggingBroker.LogError(internDependencyValidationException);
 
             return internDependencyValidationException;
         }
 
-        private InternDependencyException CreateAndLogDependencyException(Xeption exception)
+        private InternDependencyException
+            CreateAndLogDependencyException(Xeption exception)
         {
             var internDependencyException =
-                new InternDependencyException(
-                    message: "Intern dependency error occurred, contact support.",
-                        innerException: exception);
+                new InternDependencyException(exception);
 
             this.loggingBroker.LogError(internDependencyException);
 
             return internDependencyException;
         }
 
-        private InternServiceException CreateAndLogInternServiceException(Xeption exception)
+        private InternServiceException
+            CreateAndLogInternServiceException(Xeption exception)
         {
             var internServiceException =
-                new InternServiceException(
-                    message: "Intern service error occurred, contact support.",
-                        innerException: exception);
+                new InternServiceException(exception);
 
             this.loggingBroker.LogError(internServiceException);
 

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
-using Microsoft.VisualBasic;
 
 namespace InternTrack.Portal.Web.Services.Foundations.Interns
 {
@@ -29,14 +28,22 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             ValidateInternOnAdd(intern);
 
             return await this.apiBroker.PostInternAsync(intern);
-        });        
+        });
 
         public ValueTask<Intern> RetrieveInternByIdAsync(Guid internId) =>
-        TryCatch(async () => 
+        TryCatch(async () =>
         {
             ValidateInternId(internId);
 
             return await this.apiBroker.GetInternByIdAsync(internId);
+        });
+
+        public ValueTask<Intern> RemoveInternByIdAsync(Guid internId) =>
+        TryCatch(async () =>
+        {
+            ValidateInternId(internId);
+
+            return await this.apiBroker.DeleteInternByIdAsync(internId);
         });
     }
 }
