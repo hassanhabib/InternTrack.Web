@@ -7,6 +7,7 @@ using System;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.DateTimes;
 using InternTrack.Portal.Web.Brokers.Loggings;
+using InternTrack.Portal.Web.Brokers.Navigations;
 using InternTrack.Portal.Web.Models.Configurations;
 using InternTrack.Portal.Web.Services.Foundations.Interns;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace InternTrack.Portal.Web
             services.AddScoped<ILoggingBroker, LoggingBroker>();
             services.AddScoped<IDateTimeBroker, DateTimeBroker>();
             services.AddScoped<IInternService, InternService>();
+            services.AddScoped<INavigationBroker, NavigationBroker>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
