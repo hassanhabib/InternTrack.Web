@@ -3,6 +3,7 @@
 // FREE TO USE TO CONNECT THE WORLD
 // ---------------------------------------------------------------
 
+using System;
 using Xeptions;
 
 namespace InternTrack.Portal.Web.Models.Interns.Exceptions
@@ -12,6 +13,10 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
         public InternServiceException(Xeption innerException) 
             : base(message: "Intern service error occurred, contact support.",
                   innerException)
+        { }
+
+        public InternServiceException(string message, Exception innerException) :
+            base(message, innerException)
         { }
 
         public InternServiceException(string message, Xeption innerException) :

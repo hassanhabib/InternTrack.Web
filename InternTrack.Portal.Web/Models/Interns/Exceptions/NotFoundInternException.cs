@@ -8,15 +8,15 @@ using Xeptions;
 
 namespace InternTrack.Portal.Web.Models.Interns.Exceptions
 {
-    public class FailedInternServiceException : Xeption
+    public class NotFoundInternException : Xeption
     {
-        public FailedInternServiceException(Exception innerException)
-            : base(message: "Failed Intern service error occurred, contact support.",
+        public NotFoundInternException(Exception innerException)
+        : base(message: "Not found Intern error occurred, please try again.",
                   innerException)
         { }
 
-        public FailedInternServiceException(string message, Exception innerException) 
-            : base(message, innerException)
-        { } 
+        public NotFoundInternException(string message, Exception innerException) 
+            : base(message, innerException) 
+        { }
     }
 }
