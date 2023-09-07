@@ -33,7 +33,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var expectedInternDependencyException =
                 new InternDependencyException(
                     message: "Intern dependency error occurred, contact support.",
-                        innerException:failedInternDependencyException);
+                        innerException: failedInternDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllInternsAsync())
@@ -101,6 +101,43 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedDependencyException))),
+                        Times.Once());
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        private async Task ShouldThrowServiceExceptionOnRetrieveAllIfServiceErrorOccursAndLogItAsync()
+        {
+            // given
+            var serviceException = new Exception();
+
+            var failedInternServiceException =
+                new FailedInternServiceException(serviceException);
+
+            var expectedInternServiceException =
+                new InternServiceException(failedInternServiceException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllInternsAsync())
+                    .ThrowsAsync(serviceException);
+
+            // when
+            ValueTask<List<Intern>> retrieveAllInternsTask =
+                this.internService.RetrieveAllInternsAsync();
+
+            // then
+            await Assert.ThrowsAsync<InternServiceException>(() =>
+                retrieveAllInternsTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetAllInternsAsync(),
+                    Times.Once());
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternServiceException))),
                         Times.Once());
 
             this.apiBrokerMock.VerifyNoOtherCalls();
