@@ -145,6 +145,13 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
                 throw CreateAndLogDependencyException(failedInternDependencyException);
             }
+            catch (Exception exception)
+            {
+                var failedInternServiceException =
+                    new FailedInternServiceException(exception);
+
+                throw CreateAndLogInternServiceException(failedInternServiceException);
+            }
         }
 
         private InternValidationException CreateAndLogValidationException(Xeption exception)

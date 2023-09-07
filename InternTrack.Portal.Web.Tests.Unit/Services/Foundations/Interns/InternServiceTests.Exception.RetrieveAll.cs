@@ -114,11 +114,15 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var serviceException = new Exception();
 
             var failedInternServiceException =
-                new FailedInternServiceException(serviceException);
+                new FailedInternServiceException(
+                    message: "Failed Intern service error occurred, contact support",
+                            innerException: serviceException);
 
             var expectedInternServiceException =
-                new InternServiceException(failedInternServiceException);
-
+                new InternServiceException(
+                    message: "Intern service error occurred, contact support.",
+                        innerException: failedInternServiceException);
+            
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllInternsAsync())
                     .ThrowsAsync(serviceException);
