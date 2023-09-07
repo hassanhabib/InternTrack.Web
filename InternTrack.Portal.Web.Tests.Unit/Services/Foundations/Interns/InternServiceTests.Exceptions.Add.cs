@@ -5,13 +5,11 @@
 
 using System;
 using System.Collections;
-using System.Linq.Expressions;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Moq;
 using RESTFulSense.Exceptions;
 using Xunit;
@@ -92,7 +90,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var expectedInternDependencyValidationException =
                 new InternDependencyValidationException(
-                    message: "Intern dependency validation error occurred, please try again.", 
+                    message: "Intern dependency validation error occurred, please try again.",
                         innerException: invalidInternException);
 
             this.apiBrokerMock.Setup(broker =>
@@ -189,7 +187,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             string someMessage = GetRandomMessage();
             var httpResponseMessage = new HttpResponseMessage();
 
-            var httpResponseException = 
+            var httpResponseException =
                 new HttpResponseException(
                     httpResponseMessage,
                         someMessage);
@@ -242,8 +240,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var failedInternServiceException =
                 new FailedInternServiceException(
-                    message: "Failed Intern service error occurred, contact support.", 
-                        innerException:serviceException);
+                    message: "Failed Intern service error occurred, contact support.",
+                        innerException: serviceException);
 
             var expectedInternServiceException =
                 new InternServiceException(
@@ -278,5 +276,5 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
-    }    
+    }
 }

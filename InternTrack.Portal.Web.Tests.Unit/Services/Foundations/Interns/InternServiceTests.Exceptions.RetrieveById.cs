@@ -18,7 +18,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        private async Task 
+        private async Task
             ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync(
                 Exception criticalDependencyException)
         {
