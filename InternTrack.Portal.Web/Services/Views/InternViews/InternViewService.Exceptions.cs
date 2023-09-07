@@ -69,9 +69,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             Exception exception)
         {
             var internValidationException =
-                new InternViewValidationException(
-                    message: "Intern View validation error occurred, try again.",
-                        innerException: exception);
+                new InternViewValidationException(exception);
 
             this.loggingBroker.LogError(internValidationException);
 
@@ -82,9 +80,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             Exception exception)
         {
             var internViewServiceException =
-                new InternViewServiceException(
-                    message: "Intern View service error occurred, contact support.",
-                        innerException: exception);
+                new InternViewServiceException(exception);
 
             this.loggingBroker.LogError(internViewServiceException);
 
@@ -95,9 +91,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             Exception exception)
         {
             var internViewDependencyValidationException =
-                new InternViewDependencyValidationException(
-                    message: "Intern View dependency validation error occurred, try again.",
-                        innerException: exception);
+                new InternViewDependencyValidationException(exception);
 
             this.loggingBroker.LogError(internViewDependencyValidationException);
 
@@ -108,9 +102,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             Exception exception)
         {
             var internViewDependencyException =
-                new InternViewDependencyException(
-                    message: "Intern View dependency error occurred, contact support.", 
-                        innerException: exception);
+                new InternViewDependencyException(exception);
 
             this.loggingBroker.LogError(internViewDependencyException);
 

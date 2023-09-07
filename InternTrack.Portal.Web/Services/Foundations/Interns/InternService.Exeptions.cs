@@ -106,8 +106,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             }
         }
 
-        private InternValidationException
-            CreateAndLogValidationException(Xeption exception)
+        private InternValidationException CreateAndLogValidationException(
+            Xeption exception)
         {
             var internValidationException =
                 new InternValidationException(exception);
@@ -117,8 +117,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internValidationException;
         }
 
-        private InternDependencyException
-            CreateAndLogCriticalDependencyException(Xeption exception)
+        private InternDependencyException CreateAndLogCriticalDependencyException(
+            Xeption exception)
         {
             var internDependencyException =
                 new InternDependencyException(exception);
@@ -128,8 +128,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internDependencyException;
         }
 
-        private InternDependencyValidationException
-            CreateAndLogDependencyValidationException(Xeption exception)
+        private InternDependencyValidationException CreateAndLogDependencyValidationException(
+            Xeption exception)
         {
             var internDependencyValidationException =
                 new InternDependencyValidationException(exception);
@@ -139,8 +139,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internDependencyValidationException;
         }
 
-        private InternDependencyException
-            CreateAndLogDependencyException(Xeption exception)
+        private InternDependencyException CreateAndLogDependencyException(
+            Xeption exception)
         {
             var internDependencyException =
                 new InternDependencyException(exception);
@@ -150,8 +150,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internDependencyException;
         }
 
-        private InternServiceException
-            CreateAndLogInternServiceException(Xeption exception)
+        private InternServiceException CreateAndLogInternServiceException(
+            Xeption exception)
         {
             var internServiceException =
                 new InternServiceException(exception);

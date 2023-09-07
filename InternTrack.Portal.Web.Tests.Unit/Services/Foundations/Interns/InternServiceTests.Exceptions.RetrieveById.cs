@@ -18,11 +18,10 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        private async Task
-            ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync(
+        private async Task ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync(
                 Exception criticalDependencyException)
         {
-            //given
+            // given
             Guid someInternId = Guid.NewGuid();
 
             var failedInternDependencyException =
@@ -39,7 +38,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.GetInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(criticalDependencyException);
 
-            //when
+            // when
             var retrieveInternByIdTask =
                 this.internService.RetrieveInternByIdAsync(someInternId);
 
@@ -47,7 +46,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyException>(() =>
                     retrieveInternByIdTask.AsTask());
 
-            //then
+            // then
             actualInternDependencyException.Should()
                 .BeEquivalentTo(expectedInternDependencyException);
 
@@ -65,10 +64,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyExceptionOnRetrieveByIdIfDependencyApiErrorOccursAndLogItAsync()
         {
-            //given
+            // given
             Guid someInternId = Guid.NewGuid();
             string someMessage = GetRandomMessage();
             var someResponseMessage = new HttpResponseMessage();
@@ -91,7 +89,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.apiBrokerMock.Setup(broker =>
                 broker.GetInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(httpResponseException);
-            //when
+            // when
             var retrieveInternTask =
                 this.internService.RetrieveInternByIdAsync(someInternId);
 
@@ -99,7 +97,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyException>(() =>
                     retrieveInternTask.AsTask());
 
-            //then
+            // then
             actualInternDependencyException.Should()
                 .BeEquivalentTo(expectedInternDependencyException);
 
@@ -117,9 +115,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task
-            ShouldThrowServiceExceptionOnRetrieveByIdIfServiceErrorOccursAndLogItAsync()
+        private async Task ShouldThrowServiceExceptionOnRetrieveByIdIfServiceErrorOccursAndLogItAsync()
         {
+            // given
             Guid someInternId = Guid.NewGuid();
             var serviceException = new Exception();
 
@@ -137,7 +135,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.GetInternByIdAsync(It.IsAny<Guid>()))
                     .ThrowsAsync(serviceException);
 
-            //when
+            // when
             var retrieveInternTask =
                 this.internService.RetrieveInternByIdAsync(someInternId);
 
@@ -145,7 +143,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternServiceException>(() =>
                     retrieveInternTask.AsTask());
 
-            //then
+            // then
             actualInternServiceException.Should()
                 .BeEquivalentTo(expectedInternServiceException);
 

@@ -16,7 +16,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         [Fact]
         private async Task ShouldAddInternAsync()
         {
-            //given
+            // given
             Intern randomIntern = CreateRandomIntern();
             Intern inputIntern = randomIntern;
             Intern retrievedIntern = inputIntern;
@@ -26,11 +26,11 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.PostInternAsync(inputIntern))
                     .ReturnsAsync(retrievedIntern);
 
-            //when
+            // when
             Intern actualIntern =
                 await this.internService.AddInternAsync(inputIntern);
 
-            //then
+            // then
             actualIntern.Should().BeEquivalentTo(expectedIntern);
 
             this.apiBrokerMock.Verify(broker =>

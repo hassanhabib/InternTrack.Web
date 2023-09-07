@@ -15,10 +15,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     public partial class InternServiceTests
     {
         [Fact]
-        private async void
-            ShouldThrowValidationExceptionOnRetrieveByIdIfIdIsInvalidAndLogItAsync()
+        private async void ShouldThrowValidationExceptionOnRetrieveByIdIfIdIsInvalidAndLogItAsync()
         {
-            //given
+            // given
             Guid invalidInternId = Guid.Empty;
             var innerException = new Exception();
 
@@ -35,7 +34,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     message: "Intern validation error occurred. Please, try again.",
                         innerException: invalidInternException);
 
-            //when
+            // when
             var retrieveByIdInternTask =
                 this.internService.RetrieveInternByIdAsync(invalidInternId);
 
@@ -43,7 +42,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternValidationException>(() =>
                     retrieveByIdInternTask.AsTask());
 
-            //then
+            // then
             actualInternValidationException.Should().BeEquivalentTo(
                 expectedInternValidationException);
 

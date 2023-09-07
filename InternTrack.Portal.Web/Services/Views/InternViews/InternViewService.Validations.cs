@@ -17,9 +17,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
 
             if (internView == null)
             {
-                throw new NullInternViewException(
-                    message: "Null Intern error occurred.",
-                        innerException: innerException);
+                throw new NullInternViewException(innerException);
             }
         }
 
@@ -27,18 +25,13 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
         {
             if (IsInvalid(route))
             {
-                var innerException = new Exception();
-                string parameterName = "Route";
-
                 throw new InvalidInternViewException(
-                    message: $"Invalid Intern View error occurred. " +
-                        $"parameter name: {parameterName}, " +
-                            $"parameter value: {route}",
-                                innerException);
+                    parameterName: "Route",
+                        parameterValue: route);
             }
         }
 
-        private static bool IsInvalid(string text) => 
+        private static bool IsInvalid(string text) =>
             String.IsNullOrWhiteSpace(text);
     }
 }

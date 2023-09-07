@@ -15,8 +15,8 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
                   innerException)
         { }
 
-        public FailedInternServiceException(string message, Exception innerException) 
+        public FailedInternServiceException(string message, Exception innerException)
             : base(message, innerException)
-        { } 
+        { }
     }
 }

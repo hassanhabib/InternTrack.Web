@@ -14,6 +14,10 @@ namespace InternTrack.Portal.Web.Models.InternViews.Exceptions
             : base("Null Intern error occurred.")
         { }
 
+        public NullInternViewException(Exception innerException)
+            : base("Null Intern error occurred.", innerException)
+        { }
+
         public NullInternViewException(string message, Exception innerException)
             : base(message, innerException)
         { }

@@ -23,7 +23,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task ShouldThrowCriticalDependencyExceptionOnAddIfCriticalErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
-            //given
+            // given
             Intern someIntern = CreateRandomIntern();
 
             var failedInternDependencyException =
@@ -40,7 +40,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.PostInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(criticalDependencyException);
 
-            //when
+            // when
             ValueTask<Intern> addInternTask =
                 this.internService.AddInternAsync(someIntern);
 
@@ -48,7 +48,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyException>(
                     addInternTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyException.Should()
                 .BeEquivalentTo(expectedInternDependencyException);
 
@@ -68,7 +68,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         [Fact]
         private async Task ShouldThrowDependencyValidationExceptionOnAddIfBadRequestExceptionOccursAndLogItAsync()
         {
-            //given
+            // given
             Intern someIntern = CreateRandomIntern();
             IDictionary randomDictionary = CreateRandomDictionary();
             IDictionary exceptionData = randomDictionary;
@@ -97,7 +97,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.PostInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(httpResponseBadRequestException);
 
-            //when
+            // when
             ValueTask<Intern> addInternTask =
                 this.internService.AddInternAsync(someIntern);
 
@@ -105,7 +105,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyValidationException>(
                     addInternTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyValidationException.Should()
                 .BeEquivalentTo(expectedInternDependencyValidationException);
 
@@ -125,7 +125,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         [Fact]
         private async Task ShouldThrowDependencyValidationExceptionOnAddIfConflictExceptionOccursAndLogItAsync()
         {
-            //given
+            // given
             Intern someIntern = CreateRandomIntern();
             IDictionary randomDictionary = CreateRandomDictionary();
             IDictionary exceptionData = randomDictionary;
@@ -154,7 +154,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.PostInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(httpResponseConflictException);
 
-            //when
+            // when
             ValueTask<Intern> addInternTask =
                 this.internService.AddInternAsync(someIntern);
 
@@ -162,7 +162,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyValidationException>(
                     addInternTask.AsTask);
 
-            //then
+            // then
             actualInternDependencyValidationException.Should()
                 .BeEquivalentTo(expectedInternDependencyValidationException);
 
@@ -182,7 +182,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         [Fact]
         private async Task ShouldThrowInternDependencyExceptionOnAddIfResponseExceptionOccursAndLogItAsync()
         {
-            //given
+            // given
             Intern someIntern = CreateRandomIntern();
             string someMessage = GetRandomMessage();
             var httpResponseMessage = new HttpResponseMessage();
@@ -206,7 +206,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.PostInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(httpResponseException);
 
-            //when
+            // when
             ValueTask<Intern> addInternTask =
                 this.internService.AddInternAsync(someIntern);
 
@@ -214,7 +214,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternDependencyException>(() =>
                     addInternTask.AsTask());
 
-            //then
+            // then
             actualInternDependencyException.Should()
                 .BeEquivalentTo(expectedInternDependencyException);
 
@@ -234,7 +234,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         [Fact]
         private async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccursAndLogItAsync()
         {
-            //given
+            // given
             Intern someIntern = CreateRandomIntern();
             var serviceException = new Exception();
 
@@ -252,7 +252,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 broker.PostInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(serviceException);
 
-            //when
+            // when
             ValueTask<Intern> addInternTask =
                 this.internService.AddInternAsync(someIntern);
 
@@ -260,7 +260,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternServiceException>(() =>
                     addInternTask.AsTask());
 
-            //then
+            // then
             actualInternServiceException.Should()
                 .BeEquivalentTo(expectedInternServiceException);
 

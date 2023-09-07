@@ -18,7 +18,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         [Fact]
         private async Task ShouldAddInternViewAsync()
         {
-            //given
+            // given
             Guid randomUserId = Guid.NewGuid();
             DateTimeOffset randomDatTime = GetRandomDate();
 
@@ -73,12 +73,12 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                     SameInternAs(expectedInputIntern))))
                         .ReturnsAsync(returnIntern);
 
-            //when
+            // when
             InternView actualInternView =
                 await this.internViewService
                     .AddInternViewAsync(inputInternView);
 
-            //then
+            // then
             actualInternView.Should().BeEquivalentTo(expectedInternView);
 
             this.userServiceMock.Verify(service =>

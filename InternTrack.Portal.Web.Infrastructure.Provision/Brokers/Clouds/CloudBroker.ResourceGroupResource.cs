@@ -4,10 +4,10 @@
 // -------------------------------------------------------
 
 using System.Threading.Tasks;
-using Azure.Core;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager;
 using Azure;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Clouds
 {

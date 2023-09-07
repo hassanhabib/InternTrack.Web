@@ -19,8 +19,8 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
             : base(message, innerException)
         { }
 
-        public InternDependencyValidationException(string message, Xeption innerException) 
-            :base(message, innerException)
+        public InternDependencyValidationException(string message, Xeption innerException)
+            : base(message, innerException)
         { }
     }
 }

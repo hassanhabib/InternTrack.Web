@@ -3,10 +3,10 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using InternTrack.Portal.Web.Models.Interns;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using InternTrack.Portal.Web.Models.Interns;
 
 namespace InternTrack.Portal.Web.Brokers.Apis
 {

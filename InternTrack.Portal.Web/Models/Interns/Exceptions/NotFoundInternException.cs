@@ -15,8 +15,8 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
                   innerException)
         { }
 
-        public NotFoundInternException(string message, Exception innerException) 
-            : base(message, innerException) 
+        public NotFoundInternException(string message, Exception innerException)
+            : base(message, innerException)
         { }
     }
 }

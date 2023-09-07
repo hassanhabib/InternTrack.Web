@@ -10,8 +10,8 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
 {
     public class NullInternException : Xeption
     {
-        public NullInternException() 
-            : base(message: "The Intern is null.") 
+        public NullInternException()
+            : base(message: "The Intern is null.")
         { }
 
         public NullInternException(Exception innerException)

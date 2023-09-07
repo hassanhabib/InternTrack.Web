@@ -7,7 +7,6 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using InternTrack.Portal.Web.Models.InternViews;
 using InternTrack.Portal.Web.Models.InternViews.Exceptions;
 using Moq;
@@ -18,9 +17,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
     public partial class InternViewServiceTests
     {
         [Fact]
-        private async Task
-            ShouldThrowValidationExceptionOnAddIfInternViewIsNullAndLogItAsync()
+        private async Task ShouldThrowValidationExceptionOnAddIfInternViewIsNullAndLogItAsync()
         {
+            // given
             InternView nullInternView = null;
             var exception = new Exception();
 
@@ -73,8 +72,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         [InlineData(null)]
         [InlineData("")]
         [InlineData("    ")]
-        private void
-            ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
+        private void ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
                 string invalidRoute)
         {
             // given

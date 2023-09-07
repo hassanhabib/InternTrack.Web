@@ -18,8 +18,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
     {
         [Theory]
         [MemberData(nameof(InternServiceValidationExceptions))]
-        private async Task
-            ShouldThrowDependencyValidationExceptionOnAddIfInternValidationErrorOccurredAndLogItAsync(
+        private async Task ShouldThrowDependencyValidationExceptionOnAddIfInternValidationErrorOccurredAndLogItAsync(
                 Exception internServiceValidationException)
         {
             // given
@@ -72,8 +71,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
 
         [Theory]
         [MemberData(nameof(InternServiceDependencyExceptions))]
-        private async Task
-            ShouldThrowDependencyExceptionOnAddIfInternDependencyErrorOccurredAndLogItAsync(
+        private async Task ShouldThrowDependencyExceptionOnAddIfInternDependencyErrorOccurredAndLogItAsync(
                 Exception internServiceDependencyException)
         {
             // given
@@ -125,8 +123,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         }
 
         [Fact]
-        private async Task
-            ShouldThrowServiceExceptionOnAddIfServiceErrorOccurredAndLogItAsync()
+        private async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccurredAndLogItAsync()
         {
             // given
             InternView someInternView = CreateRandomInternView();
@@ -178,8 +175,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
         }
 
         [Fact]
-        private void
-            ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
+        private void ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
         {
             // given
             string someRoute = GetRandomRoute();

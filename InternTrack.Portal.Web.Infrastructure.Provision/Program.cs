@@ -3,8 +3,8 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using InternTrack.Portal.Web.Infrastructure.Provision.Services.Processings.CloudManagement;
 using System.Threading.Tasks;
+using InternTrack.Portal.Web.Infrastructure.Provision.Services.Processings.CloudManagement;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision
 {

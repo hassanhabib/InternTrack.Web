@@ -16,7 +16,7 @@ namespace InternTrack.Portal.Web.Brokers.Navigations
         {
             this.navigationManager = navigationManager;
         }
-        
+
         public void NavigateTo(string route) =>
             this.navigationManager.NavigateTo(route);
     }

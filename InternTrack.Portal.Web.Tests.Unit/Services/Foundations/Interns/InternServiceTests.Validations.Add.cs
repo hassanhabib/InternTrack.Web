@@ -18,7 +18,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         [Fact]
         private async void ShouldThrowValidationExceptionOnAddWhenInternIsNullAndLogItAsync()
         {
-            //given
+            // given
             Intern nullIntern = null;
             var someException = new Exception();
 
@@ -31,7 +31,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     message: "Intern validation error occurred. Please, try again.",
                         innerException: nullInternException);
 
-            //when
+            // when
             ValueTask<Intern> createInternTask =
                 this.internService.AddInternAsync(nullIntern);
 
@@ -39,7 +39,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 await Assert.ThrowsAsync<InternValidationException>(() =>
                     createInternTask.AsTask());
 
-            //then
+            // then
             actualInternValidationException.Should()
                 .BeEquivalentTo(expectedInternValidationException);
 
