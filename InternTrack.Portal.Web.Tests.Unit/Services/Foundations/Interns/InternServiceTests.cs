@@ -83,8 +83,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private static int GetRandomNumber() =>
             new IntRange(min: 2, max: 10).GetValue();
 
-        private Expression<Func<Xeption, bool>> SameExceptionAs(
-            Xeption expectedException)
+        private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException)
         {
             return actualException =>
                 actualException.Message == expectedException.Message &&

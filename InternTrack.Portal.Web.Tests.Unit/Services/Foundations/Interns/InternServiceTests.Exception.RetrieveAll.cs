@@ -115,14 +115,14 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var failedInternServiceException =
                 new FailedInternServiceException(
-                    message: "Failed Intern service error occurred, contact support",
+                    message: "Failed Intern service error occurred, contact support.",
                             innerException: serviceException);
 
             var expectedInternServiceException =
                 new InternServiceException(
                     message: "Intern service error occurred, contact support.",
                         innerException: failedInternServiceException);
-            
+
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllInternsAsync())
                     .ThrowsAsync(serviceException);
@@ -131,18 +131,22 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             ValueTask<List<Intern>> retrieveAllInternsTask =
                 this.internService.RetrieveAllInternsAsync();
 
+            InternServiceException actualInternServiceException =
+                await Assert.ThrowsAsync<InternServiceException>(() =>
+                    retrieveAllInternsTask.AsTask());
+
             // then
             await Assert.ThrowsAsync<InternServiceException>(() =>
                 retrieveAllInternsTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllInternsAsync(),
-                    Times.Once());
+                    Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedInternServiceException))),
-                        Times.Once());
+                        Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();

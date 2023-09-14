@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Models.Interns;
@@ -17,6 +18,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
     {
         private delegate ValueTask<Intern> ReturningInternFunction();
         private delegate ValueTask<List<Intern>> ReturningInternsFunction();
+
         private async ValueTask<Intern> TryCatch(ReturningInternFunction returningFunction)
         {
             try
@@ -50,13 +52,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
                     new FailedInternDependencyException(httpResponseUrlNotFoundException);
 
                 throw CreateAndLogCriticalDependencyException(failedInternDependencyException);
-            }
-            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
-            {
-                var failedInternDependencyException =
-                    new FailedInternDependencyException(
-                        message: "Failed Intern dependency error occurred, contact support.",
-                            innerException: httpResponseUrlNotFoundException);    
+            }           
             catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             {
                 var failedInternDependencyException =
@@ -155,8 +151,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             }
         }
 
-        private InternValidationException
-            CreateAndLogValidationException(Xeption exception)
+        private InternValidationException CreateAndLogValidationException(Xeption exception)
         {
             var internValidationException =
                 new InternValidationException(exception);
@@ -166,8 +161,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internValidationException;
         }
 
-        private InternDependencyException
-            CreateAndLogCriticalDependencyException(Xeption exception)
+        private InternDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
         {
             var internDependencyException =
                 new InternDependencyException(exception);
@@ -177,8 +171,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internDependencyException;
         }
 
-        private InternDependencyValidationException
-            CreateAndLogDependencyValidationException(Xeption exception)
+        private InternDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
         {
             var internDependencyValidationException =
                 new InternDependencyValidationException(exception);
@@ -188,8 +181,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internDependencyValidationException;
         }
 
-        private InternDependencyException
-            CreateAndLogDependencyException(Xeption exception)
+        private InternDependencyException CreateAndLogDependencyException(Xeption exception)
         {
             var internDependencyException =
                 new InternDependencyException(exception);
@@ -199,8 +191,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             return internDependencyException;
         }
 
-        private InternServiceException
-            CreateAndLogInternServiceException(Xeption exception)
+        private InternServiceException CreateAndLogInternServiceException(Xeption exception)
         {
             var internServiceException =
                 new InternServiceException(exception);
