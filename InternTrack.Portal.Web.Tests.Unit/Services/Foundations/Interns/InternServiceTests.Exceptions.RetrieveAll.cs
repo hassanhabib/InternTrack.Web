@@ -5,9 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
@@ -61,7 +59,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task ShouldThrowDependencyExceptionOnretrieveAllIfDependencyApiErrorOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync()
         {
             // given
             var randomExceptionMessage = GetRandomMessage();
@@ -116,7 +114,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var failedInternServiceException =
                 new FailedInternServiceException(
                     message: "Failed Intern service error occurred, contact support.",
-                            innerException: serviceException);
+                        innerException: serviceException);
 
             var expectedInternServiceException =
                 new InternServiceException(
