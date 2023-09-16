@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
 using InternTrack.Portal.Web.Brokers.Loggings;
@@ -37,6 +38,9 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
             return await this.apiBroker.GetInternByIdAsync(internId);
         });
+
+        public ValueTask<List<Intern>> RetrieveAllInternsAsync() =>
+            TryCatch(async () => await apiBroker.GetAllInternsAsync());
 
         public ValueTask<Intern> RemoveInternByIdAsync(Guid internId) =>
         TryCatch(async () =>

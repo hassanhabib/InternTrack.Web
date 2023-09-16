@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using InternTrack.Portal.Web.Brokers.Apis;
@@ -67,6 +68,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private static Intern CreateRandomIntern() =>
             CreateInternFiller().Create();
 
+        private static List<Intern> CreateRandomInterns() =>
+            CreateInternFiller().Create(count: GetRandomNumber()).ToList();
+
         private static Dictionary<string, List<string>> CreateRandomDictionary()
         {
             var filler = new Filler<Dictionary<string, List<string>>>();
@@ -79,8 +83,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private static int GetRandomNumber() =>
             new IntRange(min: 2, max: 10).GetValue();
 
-        private Expression<Func<Xeption, bool>> SameExceptionAs(
-            Xeption expectedException)
+        private Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException)
         {
             return actualException =>
                 actualException.Message == expectedException.Message &&

@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Models.Interns;
 
@@ -13,6 +14,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
     {
         ValueTask<Intern> AddInternAsync(Intern intern);
         ValueTask<Intern> RetrieveInternByIdAsync(Guid internId);
+        ValueTask<List<Intern>> RetrieveAllInternsAsync();
         ValueTask<Intern> RemoveInternByIdAsync(Guid internId);
     }
 }
