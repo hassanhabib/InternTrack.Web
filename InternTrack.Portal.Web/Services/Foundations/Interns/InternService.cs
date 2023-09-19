@@ -53,6 +53,8 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         public ValueTask<Intern> ModifyInternAsync(Intern intern) =>
         TryCatch(async () =>
         {
+            ValidateInternOnUpdate(intern);
+            
             return await this.apiBroker.PutInternAsync(intern);
         });
     }

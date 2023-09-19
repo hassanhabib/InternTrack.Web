@@ -30,6 +30,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
                 (Rule: IsInvalid(intern.UpdatedBy), Parameter: nameof(Intern.UpdatedBy)));
         }
 
+        private void ValidateInternOnUpdate(Intern intern)
+        {
+            ValidateInternIsNotNull(intern);
+        }
+        
         private static void ValidateInternIsNotNull(Intern intern)
         {
             if (intern is null)
