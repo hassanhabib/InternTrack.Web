@@ -49,10 +49,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
             return await this.apiBroker.DeleteInternByIdAsync(internId);
         });
-    
-        public ValueTask<Intern> ModifyInternAsync(Intern intern)
+
+        public ValueTask<Intern> ModifyInternAsync(Intern intern) =>
+        TryCatch(async () =>
         {
-            throw new NotImplementedException();
-        }
+            return await this.apiBroker.PutInternAsync(intern);
+        });
     }
 }
