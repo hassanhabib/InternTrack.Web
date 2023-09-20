@@ -47,9 +47,13 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             ValueTask<Intern> modifyInternTask =
                 this.internService.ModifyInternAsync(someIntern);
 
+            InternDependencyException actualInternDependencyException =
+                await Assert.ThrowsAsync<InternDependencyException>(
+                    modifyInternTask.AsTask);
+
             // then
-            await Assert.ThrowsAsync<InternDependencyException>(() =>
-               modifyInternTask.AsTask());
+            actualInternDependencyException.Should().BeEquivalentTo(
+                expectedInternDependencyException);
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()),
@@ -83,8 +87,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var invalidInternException =
                 new InvalidInternException(
-                    httpResponseBadRequestException,
-                    exceptionData);
+                    message:"Invalid Intern error occurred. Please correct the errors and try again.",
+                        innerException: httpResponseBadRequestException, 
+                            exceptionData);
 
             var expectedInternDependencyValidationException =
                 new InternDependencyValidationException(
@@ -99,9 +104,13 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             ValueTask<Intern> modifyInternTask =
                 this.internService.ModifyInternAsync(someIntern);
 
+            InternDependencyValidationException actualInternDependencyValidationException =
+                await Assert.ThrowsAsync<InternDependencyValidationException>(
+                    modifyInternTask.AsTask);
+
             // then
-            await Assert.ThrowsAsync<InternDependencyValidationException>(() =>
-                modifyInternTask.AsTask());
+            actualInternDependencyValidationException.Should().BeEquivalentTo(
+                expectedInternDependencyValidationException);
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()),
