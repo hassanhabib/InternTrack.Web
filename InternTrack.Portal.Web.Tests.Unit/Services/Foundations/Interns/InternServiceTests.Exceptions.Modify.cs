@@ -231,5 +231,51 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowServiceExceptionOnModifyIfServiceErrorOccursAndLogItAsync()
+        {
+            // given
+            Intern someIntern = CreateRandomIntern();
+            var serviceException = new Exception();
+
+            var failedInternServiceException =
+                new FailedInternServiceException(
+                    message: "Failed Intern service error occurred, contact support.",
+                        innerException: serviceException);
+
+            var expectedInternServiceException =
+                new InternServiceException(
+                    message: "Intern service error occurred, contact support.",
+                        innerException: failedInternServiceException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.PutInternAsync(It.IsAny<Intern>()))
+                    .ThrowsAsync(serviceException);
+
+            // when
+            ValueTask<Intern> modifyInternTask =
+                this.internService.ModifyInternAsync(someIntern);
+
+            InternServiceException actualInternServiceException =
+                await Assert.ThrowsAsync<InternServiceException>(
+                    modifyInternTask.AsTask);
+
+            // then
+            actualInternServiceException.Should().BeEquivalentTo(
+                expectedInternServiceException);
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.PutInternAsync(It.IsAny<Intern>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternServiceException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
