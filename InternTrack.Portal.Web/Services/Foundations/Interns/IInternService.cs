@@ -15,7 +15,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         ValueTask<Intern> AddInternAsync(Intern intern);
         ValueTask<Intern> RetrieveInternByIdAsync(Guid internId);
         ValueTask<List<Intern>> RetrieveAllInternsAsync();
+        ValueTask<Intern> ModifyInternAsync(Intern intern);
         ValueTask<Intern> RemoveInternByIdAsync(Guid internId);
-        ValueTask<Intern>ModifyInternAsync(Intern intern);
     }
 }
