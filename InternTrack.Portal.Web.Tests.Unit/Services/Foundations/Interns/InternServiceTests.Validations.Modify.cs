@@ -19,7 +19,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     public partial class InternServiceTests
     {
         [Fact]
-        public async void ShouldThrowValidationExceptionOnModifyWhenInternIsNullAndLogItAsync()
+        private async void ShouldThrowValidationExceptionOnModifyWhenInternIsNullAndLogItAsync()
         {
             // given
             Intern nullIntern = null;

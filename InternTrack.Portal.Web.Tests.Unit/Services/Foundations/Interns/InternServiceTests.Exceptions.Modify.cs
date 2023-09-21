@@ -23,7 +23,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         [Theory]
         [MemberData(nameof(CriticalDependencyException))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnModifyIfCriticalErrorOccursAndLogItAsync(
+        private async Task ShouldThrowCriticalDependencyExceptionOnModifyIfCriticalErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
             // given
@@ -69,7 +69,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnModifyIfBadRequestExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnModifyIfBadRequestExceptionOccursAndLogItAsync()
         {
             // given
             Intern someIntern = CreateRandomIntern();
@@ -126,7 +126,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnModifyIfConflictExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnModifyIfConflictExceptionOccursAndLogItAsync()
         {
             // given
             Intern someIntern = CreateRandomIntern();
@@ -181,7 +181,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowInternDependencyExceptionOnModifyIfResponseExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowInternDependencyExceptionOnModifyIfResponseExceptionOccursAndLogItAsync()
         {
             // given
             Intern someIntern = CreateRandomIntern();
@@ -233,7 +233,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        public async Task ShouldThrowServiceExceptionOnModifyIfServiceErrorOccursAndLogItAsync()
+        private async Task ShouldThrowServiceExceptionOnModifyIfServiceErrorOccursAndLogItAsync()
         {
             // given
             Intern someIntern = CreateRandomIntern();

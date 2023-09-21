@@ -18,7 +18,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     public partial class InternServiceTests
     {
         [Fact]
-        public async Task ShouldModifyInternAsync()
+        private async Task ShouldModifyInternAsync()
         {
             // given
             Intern randomIntern = CreateRandomIntern();
