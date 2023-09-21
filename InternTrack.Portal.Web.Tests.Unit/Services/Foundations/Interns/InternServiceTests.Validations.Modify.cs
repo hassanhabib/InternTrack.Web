@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using Moq;
@@ -25,15 +26,20 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var nullInternException = new NullInternException();
 
             var expectedInternValidationException =
-                new InternValidationException(nullInternException);
+                new InternValidationException("Intern validation error occurred. Please, try again.",
+                  innerException: nullInternException);
 
             // when
             ValueTask<Intern> modifyInternTask =
                 this.internService.ModifyInternAsync(nullIntern);
 
+            InternValidationException actualInternValidationException =
+               await Assert.ThrowsAsync<InternValidationException>(
+                   modifyInternTask.AsTask);
+
             // then
-            await Assert.ThrowsAsync<InternValidationException>(() =>
-                modifyInternTask.AsTask());
+            actualInternValidationException.Should().BeEquivalentTo(
+                expectedInternValidationException);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(expectedInternValidationException))),
