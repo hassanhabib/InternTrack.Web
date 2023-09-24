@@ -69,7 +69,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async Task ShouldThrowDependencyValidationExceptionOnModifyIfBadRequestExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnModifyIfBadRequestOccursAndLogItAsync()
         {
             // given
             Intern someIntern = CreateRandomIntern();
@@ -126,8 +126,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         }
 
         [Fact]
-        private async 
-            Task ShouldThrowDependencyValidationExceptionOnModifyIfConflictExceptionOccursAndLogItAsync()
+        private async Task ShouldThrowDependencyValidationExceptionOnModifyIfConflictExceptionOccursAndLogItAsync()
         {
             // given
             Intern someIntern = CreateRandomIntern();
