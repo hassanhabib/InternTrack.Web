@@ -26,7 +26,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var nullInternException = new NullInternException();
 
             var expectedInternValidationException =
-                new InternValidationException("Intern validation error occurred. Please, try again.",
+                new InternValidationException(
+                    message: "Intern validation error occurred. Please, try again.",
                   innerException: nullInternException);
 
             // when
