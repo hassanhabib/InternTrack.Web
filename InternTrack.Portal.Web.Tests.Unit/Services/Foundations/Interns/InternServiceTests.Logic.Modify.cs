@@ -33,7 +33,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             // when
             Intern actualIntern =
-                await this.internService.ModifyInternAsync(inputIntern);
+                await this.internService.ModifyInternAsync(
+                    inputIntern);
 
             // then
             actualIntern.Should().BeEquivalentTo(expectedIntern);
