@@ -37,7 +37,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                     inputIntern);
 
             // then
-            actualIntern.Should().BeEquivalentTo(expectedIntern);
+            actualIntern.Should().BeEquivalentTo(
+                expectedIntern);
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PutInternAsync(inputIntern),
