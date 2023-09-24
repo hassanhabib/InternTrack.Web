@@ -43,7 +43,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 expectedInternValidationException);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameExceptionAs(expectedInternValidationException))),
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternValidationException))),
                     Times.Once);
 
             this.apiBrokerMock.Verify(broker =>
