@@ -21,7 +21,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task ShouldModifyInternAsync()
         {
             // given
-            Intern randomIntern = CreateRandomIntern();
+            Intern randomIntern = 
+                CreateRandomIntern();
             Intern inputIntern = randomIntern;
             Intern retrievedIntern = inputIntern;
             Intern expectedIntern = retrievedIntern;
