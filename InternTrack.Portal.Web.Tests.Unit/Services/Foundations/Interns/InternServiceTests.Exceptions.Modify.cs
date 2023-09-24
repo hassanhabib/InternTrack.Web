@@ -149,8 +149,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                             exceptionData);
 
             var expectedInternDependencyValidationException =
-                new InternDependencyValidationException(message: "Intern dependency validation error occurred, please try again.",
-                  innerException: invalidInternException);
+                new InternDependencyValidationException(
+                    message: "Intern dependency validation error occurred, please try again.",
+                        innerException: invalidInternException);
             
             this.apiBrokerMock.Setup(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()))
