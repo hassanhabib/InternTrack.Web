@@ -87,7 +87,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var invalidInternException =
                 new InvalidInternException(
-                    message:"Invalid Intern error occurred. Please correct the errors and try again.",
+                    message :"Invalid Intern error occurred. Please correct the errors and try again.",
                         innerException: httpResponseBadRequestException, 
                             exceptionData);
 
