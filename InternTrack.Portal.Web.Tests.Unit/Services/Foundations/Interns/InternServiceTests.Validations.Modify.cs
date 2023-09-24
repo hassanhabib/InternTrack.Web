@@ -26,7 +26,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var nullInternException = new NullInternException();
 
             var expectedInternValidationException =
-                new InternValidationException("Intern validation error occurred. Please, try again.",
+                new InternValidationException(
+                    message: "Intern validation error occurred. Please, try again.",
                   innerException: nullInternException);
 
             // when
@@ -42,7 +43,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 expectedInternValidationException);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameExceptionAs(expectedInternValidationException))),
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedInternValidationException))),
                     Times.Once);
 
             this.apiBrokerMock.Verify(broker =>
