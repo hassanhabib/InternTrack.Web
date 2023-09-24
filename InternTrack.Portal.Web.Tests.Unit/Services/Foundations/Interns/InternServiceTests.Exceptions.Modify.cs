@@ -143,9 +143,10 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             httpResponseConflictException.AddData(exceptionData);
 
             var invalidInternException =
-                new InvalidInternException(message: "Invalid Intern error occurred. Please correct the errors and try again.",
-                  innerException: httpResponseConflictException, 
-                    exceptionData);
+                new InvalidInternException(
+                    message: "Invalid Intern error occurred. Please correct the errors and try again.",
+                        innerException: httpResponseConflictException, 
+                            exceptionData);
 
             var expectedInternDependencyValidationException =
                 new InternDependencyValidationException(message: "Intern dependency validation error occurred, please try again.",
