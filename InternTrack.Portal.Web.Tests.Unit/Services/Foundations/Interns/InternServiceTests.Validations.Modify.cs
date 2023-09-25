@@ -4,15 +4,13 @@
 // -------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using Moq;
 using Xunit;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -69,9 +67,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             {
                 FirstName = invalidText
             };
-
             var invalidInternException = new InvalidInternException(
-                message: "Invalid Intern. Please correct the errors and try again",
+                message: "Invalid Intern error occurred.Please correct the errors and try again.",
                     innerException: innerException);
 
             invalidInternException.AddData(
@@ -100,7 +97,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             invalidInternException.AddData(
                 key: nameof(Intern.UpdatedDate),
-                values: new String[] { "Date is required",
+                values: new System.String[] { "Date is required",
                     $"Date is the same as {nameof(Intern.CreatedDate)}"});
 
             invalidInternException.AddData(
@@ -136,17 +133,21 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             actualInternValidationException.Should().BeEquivalentTo(
                 expectedInternValidationException);
 
-            this.apiBrokerMock.Verify(broker =>
-                broker.PutInternAsync(It.IsAny<Intern>()),
-                    Times.Never);
+            this.dateTimeBrokerMock.Verify(broker =>
+                broker.GetCurrentDateTimeOffset(),
+                    Times.Once());
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedInternValidationException))),
                         Times.Once);
 
+            this.apiBrokerMock.Verify(broker =>
+                broker.PutInternAsync(It.IsAny<Intern>()),
+                    Times.Never);
+
             this.apiBrokerMock.VerifyNoOtherCalls();
-            this.loggingBrokerMock.VerifyNoOtherCalls();   
+            this.loggingBrokerMock.VerifyNoOtherCalls();
         }
     }
 }

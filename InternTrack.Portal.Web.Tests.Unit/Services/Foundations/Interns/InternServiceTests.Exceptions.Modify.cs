@@ -57,7 +57,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()),
-                    Times.Once);
+                    Times.Never);
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogCritical(It.Is(SameExceptionAs(
