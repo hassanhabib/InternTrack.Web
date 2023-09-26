@@ -65,10 +65,13 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var invalidIntern = new Intern
             {
-                FirstName = invalidText
+                FirstName = invalidText,
+                LastName = invalidText,
+                MiddleName = invalidText,
+                Email = invalidText,               
             };
             var invalidInternException = new InvalidInternException(
-                message: "Invalid Intern error occurred.Please correct the errors and try again.",
+                message: "Invalid Intern error occurred. Please correct the errors and try again.",
                     innerException: innerException);
 
             invalidInternException.AddData(
@@ -79,6 +82,10 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 key: nameof(Intern.FirstName),
                 values: "Text is required");
 
+            invalidInternException.AddData(
+                key: nameof(Intern.MiddleName),
+                values: "Text is required");
+            
             invalidInternException.AddData(
                 key: nameof(Intern.LastName),
                 values: "Text is required");
@@ -93,15 +100,14 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             invalidInternException.AddData(
                 key: nameof(Intern.Status),
-                values: "Text is required");
-
-            invalidInternException.AddData(
-                key: nameof(Intern.UpdatedDate),
-                values: new System.String[] { "Date is required",
-                    $"Date is the same as {nameof(Intern.CreatedDate)}"});
+                values: "Text is required");        
 
             invalidInternException.AddData(
                 key: nameof(Intern.CreatedDate),
+                values: "Date is required");
+
+            invalidInternException.AddData(
+                key: nameof(Intern.UpdatedDate),
                 values: "Date is required");
 
             invalidInternException.AddData(
@@ -132,10 +138,6 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             // then
             actualInternValidationException.Should().BeEquivalentTo(
                 expectedInternValidationException);
-
-            this.dateTimeBrokerMock.Verify(broker =>
-                broker.GetCurrentDateTimeOffset(),
-                    Times.Once());
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(

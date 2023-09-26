@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using InternTrack.Portal.Web.Brokers.Apis;
-using InternTrack.Portal.Web.Brokers.DateTimes;
 using InternTrack.Portal.Web.Brokers.Loggings;
 using InternTrack.Portal.Web.Models.Interns;
 
@@ -17,13 +16,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
-        public readonly IDateTimeBroker dateTimeBroker;
 
-        public InternService(IApiBroker apiBroker, ILoggingBroker loggingBroker, IDateTimeBroker dateTimeBroker)
+        public InternService(IApiBroker apiBroker, ILoggingBroker loggingBroker)
         {
             this.apiBroker = apiBroker;
             this.loggingBroker = loggingBroker;
-            this.dateTimeBroker = dateTimeBroker;
         }
 
         public ValueTask<Intern> AddInternAsync(Intern intern) =>
@@ -54,11 +51,11 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         });
 
         public ValueTask<Intern> ModifyInternAsync(Intern intern) =>
-        TryCatch((ReturningInternFunction)(async () =>
+        TryCatch(async () =>
         {
             ValidateInternOnModify(intern);
 
             return await this.apiBroker.PutInternAsync(intern);
-        }));
+        });
     }
 }

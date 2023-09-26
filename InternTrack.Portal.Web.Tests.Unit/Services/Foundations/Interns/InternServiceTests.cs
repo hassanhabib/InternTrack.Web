@@ -25,19 +25,16 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
     {
         private readonly Mock<IApiBroker> apiBrokerMock;
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
-        private readonly Mock<IDateTimeBroker> dateTimeBrokerMock;
         private readonly IInternService internService;
 
         public InternServiceTests()
         {
             this.apiBrokerMock = new Mock<IApiBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
-            this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
 
             this.internService = new InternService(
                 apiBroker: this.apiBrokerMock.Object,
-                loggingBroker: this.loggingBrokerMock.Object,
-                dateTimeBroker: this.dateTimeBrokerMock.Object); 
+                loggingBroker: this.loggingBrokerMock.Object);
         }
 
         public static TheoryData CriticalDependencyException()

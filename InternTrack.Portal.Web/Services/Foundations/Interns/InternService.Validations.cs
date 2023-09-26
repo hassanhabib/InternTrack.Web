@@ -37,6 +37,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             Validate(
                 (Rule: IsInvalid(intern.Id), Parameter: nameof(Intern.Id)),
                 (Rule: IsInvalid(intern.FirstName), Parameter: nameof(Intern.FirstName)),
+                (Rule: IsInvalid(intern.MiddleName), Parameter: nameof(Intern.MiddleName)),
                 (Rule: IsInvalid(intern.LastName), Parameter: nameof(Intern.LastName)),
                 (Rule: IsInvalid(intern.Email), Parameter: nameof(Intern.Email)),
                 (Rule: IsInvalid(intern.PhoneNumber), Parameter: nameof(Intern.PhoneNumber)),
@@ -45,15 +46,7 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
                 (Rule: IsInvalid(intern.CreatedDate), Parameter: nameof(Intern.CreatedDate)),
                 (Rule: IsInvalid(intern.JoinDate), Parameter: nameof(Intern.JoinDate)),
                 (Rule: IsInvalid(intern.CreatedBy), Parameter: nameof(Intern.CreatedBy)),
-                (Rule: IsInvalid(intern.UpdatedBy), Parameter: nameof(Intern.UpdatedBy)),
-                (Rule: IsNotRecent(intern.UpdatedDate), Parameter: nameof(Intern.UpdatedDate)),
-
-                (Rule: IsSame(
-                        firstDate: intern.UpdatedDate,
-                        secondDate: intern.CreatedDate,
-                        secondDateName: nameof(Intern.CreatedDate)),
-
-                Parameter: nameof(Intern.UpdatedDate)));
+                (Rule: IsInvalid(intern.UpdatedBy), Parameter: nameof(Intern.UpdatedBy)));                 
         }
         
         private static void ValidateInternIsNotNull(Intern intern)
@@ -84,32 +77,6 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
             Condition = String.IsNullOrWhiteSpace(text),
             Message = "Text is required"
         };
-
-        private dynamic IsNotRecent(DateTimeOffset date) => new
-        {
-            Condition = IsDateNotRecent(date),
-            Message = "Date is not recent"
-        };
-
-        private static dynamic IsSame(
-            DateTimeOffset firstDate,
-            DateTimeOffset secondDate,
-            string secondDateName) => new
-            {
-                Condition = firstDate == secondDate,
-                Message = $"Date is the same as {secondDateName}"
-            };
-
-        private bool IsDateNotRecent(DateTimeOffset date)
-        {
-            DateTimeOffset currentDateTime =
-                this.dateTimeBroker.GetCurrentDateTimeOffset();
-
-            TimeSpan timeDifference = currentDateTime.Subtract(date);
-            TimeSpan oneMinute = TimeSpan.FromMinutes(1);
-
-            return timeDifference.Duration() > oneMinute;
-        }
 
         private static void Validate(params (dynamic Rule, string Parameter)[] validations)
         {
