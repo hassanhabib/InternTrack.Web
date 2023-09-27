@@ -42,14 +42,6 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
         public ValueTask<List<Intern>> RetrieveAllInternsAsync() =>
             TryCatch(async () => await apiBroker.GetAllInternsAsync());
 
-        public ValueTask<Intern> RemoveInternByIdAsync(Guid internId) =>
-        TryCatch(async () =>
-        {
-            ValidateInternId(internId);
-
-            return await this.apiBroker.DeleteInternByIdAsync(internId);
-        });
-
         public ValueTask<Intern> ModifyInternAsync(Intern intern) =>
         TryCatch(async () =>
         {
@@ -57,5 +49,13 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
 
             return await this.apiBroker.PutInternAsync(intern);
         });
+
+        public ValueTask<Intern> RemoveInternByIdAsync(Guid internId) =>
+        TryCatch(async () =>
+        {
+            ValidateInternId(internId);
+
+            return await this.apiBroker.DeleteInternByIdAsync(internId);
+        });      
     }
 }
