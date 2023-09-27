@@ -10,7 +10,6 @@ using InternTrack.Portal.Web.Models.Interns;
 using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using Moq;
 using Xunit;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 {
@@ -68,7 +67,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 FirstName = invalidText,
                 LastName = invalidText,
                 MiddleName = invalidText,
-                Email = invalidText,               
+                Email = invalidText,
             };
             var invalidInternException = new InvalidInternException(
                 message: "Invalid Intern error occurred. Please correct the errors and try again.",
@@ -85,7 +84,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             invalidInternException.AddData(
                 key: nameof(Intern.MiddleName),
                 values: "Text is required");
-            
+
             invalidInternException.AddData(
                 key: nameof(Intern.LastName),
                 values: "Text is required");
@@ -100,7 +99,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             invalidInternException.AddData(
                 key: nameof(Intern.Status),
-                values: "Text is required");        
+                values: "Text is required");
 
             invalidInternException.AddData(
                 key: nameof(Intern.CreatedDate),

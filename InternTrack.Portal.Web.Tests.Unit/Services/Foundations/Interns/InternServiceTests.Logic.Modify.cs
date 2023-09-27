@@ -3,10 +3,6 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
@@ -21,7 +17,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
         private async Task ShouldModifyInternAsync()
         {
             // given
-            Intern randomIntern = 
+            Intern randomIntern =
                 CreateRandomIntern();
             Intern inputIntern = randomIntern;
             Intern retrievedIntern = inputIntern;

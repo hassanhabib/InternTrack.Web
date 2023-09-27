@@ -7,7 +7,6 @@ using System;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
-using InternTrack.Portal.Web.Models.Interns.Exceptions;
 using InternTrack.Portal.Web.Models.InternViews;
 using InternTrack.Portal.Web.Models.InternViews.Exceptions;
 using Moq;

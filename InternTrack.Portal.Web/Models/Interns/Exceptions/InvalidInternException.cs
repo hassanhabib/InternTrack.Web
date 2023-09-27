@@ -30,8 +30,8 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
             : base(message, innerException)
         { }
 
-        public InvalidInternException(string message, Exception innerException, IDictionary data) 
-            : base(message, innerException, data) 
+        public InvalidInternException(string message, Exception innerException, IDictionary data)
+            : base(message, innerException, data)
         { }
     }
 }

@@ -109,7 +109,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
         {
             var internViewDependencyException =
                 new InternViewDependencyException(
-                    message: "Intern View dependency error occurred, contact support.", 
+                    message: "Intern View dependency error occurred, contact support.",
                         innerException: exception);
 
             this.loggingBroker.LogError(internViewDependencyException);
