@@ -30,6 +30,25 @@ namespace InternTrack.Portal.Web.Services.Foundations.Interns
                 (Rule: IsInvalid(intern.UpdatedBy), Parameter: nameof(Intern.UpdatedBy)));
         }
 
+        private void ValidateInternOnModify(Intern intern)
+        {
+            ValidateInternIsNotNull(intern);
+
+            Validate(
+                (Rule: IsInvalid(intern.Id), Parameter: nameof(Intern.Id)),
+                (Rule: IsInvalid(intern.FirstName), Parameter: nameof(Intern.FirstName)),
+                (Rule: IsInvalid(intern.MiddleName), Parameter: nameof(Intern.MiddleName)),
+                (Rule: IsInvalid(intern.LastName), Parameter: nameof(Intern.LastName)),
+                (Rule: IsInvalid(intern.Email), Parameter: nameof(Intern.Email)),
+                (Rule: IsInvalid(intern.PhoneNumber), Parameter: nameof(Intern.PhoneNumber)),
+                (Rule: IsInvalid(intern.Status), Parameter: nameof(Intern.Status)),
+                (Rule: IsInvalid(intern.UpdatedDate), Parameter: nameof(Intern.UpdatedDate)),
+                (Rule: IsInvalid(intern.CreatedDate), Parameter: nameof(Intern.CreatedDate)),
+                (Rule: IsInvalid(intern.JoinDate), Parameter: nameof(Intern.JoinDate)),
+                (Rule: IsInvalid(intern.CreatedBy), Parameter: nameof(Intern.CreatedBy)),
+                (Rule: IsInvalid(intern.UpdatedBy), Parameter: nameof(Intern.UpdatedBy)));                 
+        }
+        
         private static void ValidateInternIsNotNull(Intern intern)
         {
             if (intern is null)
