@@ -3,9 +3,9 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
+using System.Threading.Tasks;
 using Azure.ResourceManager.ApplicationInsights;
 using Azure.ResourceManager.Resources;
-using System.Threading.Tasks;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Clouds
 {

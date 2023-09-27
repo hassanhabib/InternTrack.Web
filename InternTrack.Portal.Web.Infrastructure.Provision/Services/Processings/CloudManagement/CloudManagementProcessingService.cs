@@ -3,6 +3,8 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Azure.ResourceManager.ApplicationInsights;
 using Azure.ResourceManager.AppService;
 using Azure.ResourceManager.Resources;
@@ -11,8 +13,6 @@ using InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Configurations;
 using InternTrack.Portal.Web.Infrastructure.Provision.Models.Configurations;
 using InternTrack.Portal.Web.Infrastructure.Provision.Models.Storages;
 using InternTrack.Portal.Web.Infrastructure.Provision.Services.Foundations.CloudManagements;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Services.Processings.CloudManagement
 {

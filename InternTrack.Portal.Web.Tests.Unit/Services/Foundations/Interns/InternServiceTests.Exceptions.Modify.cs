@@ -5,10 +5,7 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using InternTrack.Portal.Web.Models.Interns;
@@ -38,11 +35,11 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 new InternDependencyException(
                     message: "Intern dependency error occurred, contact support.",
                         innerException: failedInternDependencyException);
-            
+
             this.apiBrokerMock.Setup(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(criticalDependencyException);
-            
+
             // when
             ValueTask<Intern> modifyInternTask =
                 this.internService.ModifyInternAsync(someIntern);
@@ -87,15 +84,15 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
 
             var invalidInternException =
                 new InvalidInternException(
-                    message :"Invalid Intern error occurred. Please correct the errors and try again.",
-                        innerException: httpResponseBadRequestException, 
+                    message: "Invalid Intern error occurred. Please correct the errors and try again.",
+                        innerException: httpResponseBadRequestException,
                             exceptionData);
 
             var expectedInternDependencyValidationException =
                 new InternDependencyValidationException(
                     message: "Intern dependency validation error occurred, please try again.",
                         innerException: invalidInternException);
-            
+
             this.apiBrokerMock.Setup(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(httpResponseBadRequestException);
@@ -145,14 +142,14 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
             var invalidInternException =
                 new InvalidInternException(
                     message: "Invalid Intern error occurred. Please correct the errors and try again.",
-                        innerException: httpResponseConflictException, 
+                        innerException: httpResponseConflictException,
                             exceptionData);
 
             var expectedInternDependencyValidationException =
                 new InternDependencyValidationException(
                     message: "Intern dependency validation error occurred, please try again.",
                         innerException: invalidInternException);
-            
+
             this.apiBrokerMock.Setup(broker =>
                 broker.PutInternAsync(It.IsAny<Intern>()))
                     .ThrowsAsync(httpResponseConflictException);
@@ -194,7 +191,7 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.Interns
                 new HttpResponseException(
                     httpResponseMessage,
                     someMessage);
-            
+
             var failedInternDependencyException =
                 new FailedInternDependencyException(
                     message: "Failed Intern dependency error occurred, contact support.",

@@ -38,7 +38,7 @@ namespace InternTrack.Portal.Web.Services.Views.InternViews
             }
         }
 
-        private static bool IsInvalid(string text) => 
+        private static bool IsInvalid(string text) =>
             String.IsNullOrWhiteSpace(text);
     }
 }

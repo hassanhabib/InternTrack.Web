@@ -3,9 +3,9 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
+using System.IO;
 using InternTrack.Portal.Web.Infrastructure.Provision.Models.Configurations;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Configurations
 {

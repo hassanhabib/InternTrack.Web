@@ -3,13 +3,13 @@
 // FREE TO USE FOR THE WORLD
 // -------------------------------------------------------
 
-using Azure.Core;
-using Azure.ResourceManager.AppService.Models;
-using Azure.ResourceManager.AppService;
-using Azure.ResourceManager.Resources;
-using Azure.ResourceManager;
-using Azure;
 using System.Threading.Tasks;
+using Azure;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.AppService;
+using Azure.ResourceManager.AppService.Models;
+using Azure.ResourceManager.Resources;
 
 namespace InternTrack.Portal.Web.Infrastructure.Provision.Brokers.Clouds
 {

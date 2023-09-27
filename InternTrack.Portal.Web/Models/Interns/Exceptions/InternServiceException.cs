@@ -10,7 +10,7 @@ namespace InternTrack.Portal.Web.Models.Interns.Exceptions
 {
     public class InternServiceException : Xeption
     {
-        public InternServiceException(Xeption innerException) 
+        public InternServiceException(Xeption innerException)
             : base(message: "Intern service error occurred, contact support.",
                   innerException)
         { }
