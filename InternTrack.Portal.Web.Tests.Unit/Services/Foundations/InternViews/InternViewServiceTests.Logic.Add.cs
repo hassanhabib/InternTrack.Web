@@ -94,8 +94,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                     SameInternAs(expectedInputIntern))),
                         Times.Once);
 
-            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
