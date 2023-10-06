@@ -63,10 +63,10 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                     expectedDependencyValidationException))),
                         Times.Once);
 
-            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
@@ -117,10 +117,10 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                     expectedDependencyException))),
                         Times.Once);
 
-            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
@@ -170,9 +170,9 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 service.AddInternAsync(It.IsAny<Intern>()),
                     Times.Once);
 
-            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
         }

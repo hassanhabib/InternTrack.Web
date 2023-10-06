@@ -111,8 +111,8 @@ namespace InternTrack.Portal.Web.Tests.Unit.Services.Foundations.InternViews
                 broker.NavigateTo(It.IsAny<string>()),
                     Times.Never);
 
-            this.navigationBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.internServiceMock.VerifyNoOtherCalls();
